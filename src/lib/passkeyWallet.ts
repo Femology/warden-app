@@ -52,15 +52,7 @@ export function connectedWalletId(): string | undefined {
   return kit.contractId;
 }
 
-/**
- * Signs a warden-sdk buildX() result with the connected passkey (authorizing
- * the wallet's own Soroban auth entry), then has the server add the
- * deployer's envelope signature (it is the transaction's fee/sequence
- * source -- see CONFIG.deployerPublicKey). Returns fully-signed XDR ready
- * for warden-sdk's matching submitX method.
- */
-export async function signWithPasskey(unsignedXdr: string): Promise<string> {
-  const assembled: AssembledTransaction<unknown> = await assembledFromXdr(unsignedXdr);
+async function coSign(assembled: AssembledTransaction<unknown>): Promise<string> {
   await kit.sign(assembled);
 
   const coSignRes = await fetch('/api/co-sign', {
@@ -76,4 +68,30 @@ export async function signWithPasskey(unsignedXdr: string): Promise<string> {
     throw new Error(coSignJson.error ?? 'Failed to co-sign transaction.');
   }
   return coSignJson.xdr;
+}
+
+/**
+ * Signs a warden-sdk buildX() result with the connected passkey (authorizing
+ * the wallet's own Soroban auth entry), then has the server add the
+ * deployer's envelope signature (it is the transaction's fee/sequence
+ * source -- see CONFIG.deployerPublicKey). Returns fully-signed XDR ready
+ * for warden-sdk's matching submitX method.
+ */
+export async function signWithPasskey(unsignedXdr: string): Promise<string> {
+  const assembled = await assembledFromXdr(unsignedXdr);
+  return coSign(assembled);
+}
+
+/**
+ * Same two-step signing as signWithPasskey, but for a transaction built
+ * against a different contract (e.g. the reference asset's SEP-41
+ * transfer) -- the caller supplies how to reconstruct an
+ * AssembledTransaction from XDR for that specific contract's spec.
+ */
+export async function signWithPasskeyFor<T>(
+  unsignedXdr: string,
+  reconstruct: (xdr: string) => Promise<AssembledTransaction<T>>,
+): Promise<string> {
+  const assembled = await reconstruct(unsignedXdr);
+  return coSign(assembled as AssembledTransaction<unknown>);
 }
