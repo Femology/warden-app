@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: vitest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # npm's install-script allowlist blocks warden-sdk's own `prepare` build
+      # step by default (a third-party git dependency's lifecycle script) --
+      # build it explicitly so this doesn't silently ship a stale/missing
+      # dist/ into the test run.
+      - name: Ensure warden-sdk is built
+        run: |
+          if [ ! -f node_modules/warden-sdk/dist/index.js ]; then
+            (cd node_modules/warden-sdk && npx tsc)
+          fi
+
+      - run: npm test
