@@ -109,7 +109,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
       <button
         type="submit"
         disabled={isInvalid || status === 'submitting'}
-        className="self-start rounded-md bg-edge px-6 py-2.5 font-medium text-mist-100 transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="self-start rounded-md bg-edge px-6 py-2.5 font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === 'submitting' ? 'Setting limits…' : 'Set limits'}
       </button>

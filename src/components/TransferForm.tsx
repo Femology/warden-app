@@ -111,7 +111,7 @@ export function TransferForm({ wallet }: TransferFormProps) {
         <button
           type="submit"
           disabled={busy || !recipient || !amount}
-          className="self-start rounded-md bg-edge px-6 py-2.5 font-medium text-mist-100 transition-opacity hover:opacity-90 disabled:opacity-50"
+          className="self-start rounded-md bg-edge px-6 py-2.5 font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
         >
           {status === 'evaluating'
             ? 'Checking…'

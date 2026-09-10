@@ -35,7 +35,7 @@ export default function VelocityPage() {
       <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-4 px-6 py-20">
         <p className="text-mist-100">
           Connect a wallet first from the{' '}
-          <Link href="/" className="text-edge underline">
+          <Link href="/" className="text-mist-100 underline decoration-edge underline-offset-2 hover:text-edge">
             home page
           </Link>
           .
@@ -56,7 +56,7 @@ export default function VelocityPage() {
       ) : !policy ? (
         <p className="text-mist-400">
           No policy set yet.{' '}
-          <Link href="/policy" className="text-edge underline">
+          <Link href="/policy" className="text-mist-100 underline decoration-edge underline-offset-2 hover:text-edge">
             Set one up
           </Link>
           .
