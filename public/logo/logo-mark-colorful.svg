@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" fill="none">
+  <!-- Warden mark: two interlocking frames woven through a diagonal band.
+       Draw order creates the weave: jade square (back) -> amber diagonal
+       (crosses over jade, under purple) -> purple square (front). -->
+  <rect x="38" y="72" width="128" height="128" stroke="#2FD4A3" stroke-width="26" stroke-linejoin="miter"/>
+  <line x1="10" y1="210" x2="210" y2="10" stroke="#FFB020" stroke-width="28" stroke-linecap="square"/>
+  <rect x="64" y="24" width="128" height="128" stroke="#6C5CE7" stroke-width="26" stroke-linejoin="miter"/>
+</svg>
