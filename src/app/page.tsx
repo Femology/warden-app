@@ -1,21 +1,44 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { ConnectWallet } from '@/components/ConnectWallet';
 
 const DEMO_LIMIT = 500;
 const MAX_DRAG = 1000;
+
+const SIGNALS = [
+  {
+    illustration: '/illustrations/landing/section-amount.svg',
+    title: 'The amount',
+    body: 'Under your no-confirmation limit, a transfer goes straight through. Over it, Warden asks once more.',
+  },
+  {
+    illustration: '/illustrations/landing/section-recipient.svg',
+    title: 'The recipient',
+    body: "Sent to them before, or trusted them explicitly? That connection skips the new-recipient check.",
+  },
+  {
+    illustration: '/illustrations/landing/section-velocity.svg',
+    title: 'Velocity',
+    body: 'How much you’ve already sent in the last 24 hours -- even small transfers count once you’re close to your cap.',
+  },
+];
 
 export default function Home() {
   const [amount, setAmount] = useState(150);
   const isStepUp = amount > DEMO_LIMIT;
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-16 px-6 py-20">
+    <main className="relative mx-auto flex min-h-screen max-w-3xl flex-col gap-16 px-6 py-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10 opacity-40"
+        style={{ backgroundImage: "url('/illustrations/landing/bg-texture-noise.png')", backgroundRepeat: 'repeat' }}
+      />
+
       <header className="flex items-center justify-between">
-        <span className="font-display text-lg font-semibold tracking-tight text-mist-100">
-          Warden
-        </span>
+        <Image src="/logo/logo-lockup-dark.svg" alt="Warden" width={108} height={135} priority className="h-10 w-auto" />
         <ConnectWallet />
       </header>
 
@@ -82,12 +105,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-3 border-t border-ink-700 pt-10">
+      <section className="flex flex-col gap-10 border-t border-ink-700 pt-12">
         <p className="max-w-xl text-mist-400">
           Most wallet apps treat every payment the same. Warden lets a wallet owner set
           their own rules, so the friction shows up where the risk actually is, instead
-          of on every single tap.
+          of on every single tap. Three signals decide it.
         </p>
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {SIGNALS.map((signal) => (
+            <div key={signal.title} className="flex flex-col gap-3">
+              <Image src={signal.illustration} alt="" aria-hidden="true" width={240} height={200} className="h-auto w-full" />
+              <h2 className="font-display text-lg font-semibold text-mist-100">{signal.title}</h2>
+              <p className="text-sm text-mist-400">{signal.body}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
