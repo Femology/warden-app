@@ -6,7 +6,7 @@ const buildAddTrustedRecipient = vi.fn();
 const submitAddTrustedRecipient = vi.fn();
 const buildRemoveTrustedRecipient = vi.fn();
 const submitRemoveTrustedRecipient = vi.fn();
-const signWithPasskey = vi.fn();
+const signXdr = vi.fn();
 
 vi.mock('@/lib/wardenClient', () => ({
   wardenClient: {
@@ -17,8 +17,9 @@ vi.mock('@/lib/wardenClient', () => ({
   },
 }));
 
-vi.mock('@/lib/passkeyWallet', () => ({
-  signWithPasskey: (...args: unknown[]) => signWithPasskey(...args),
+vi.mock('@/lib/wallet', () => ({
+  signXdr: (...args: unknown[]) => signXdr(...args),
+  sourceAccountOverride: () => undefined,
 }));
 
 describe('TrustedRecipientsList', () => {
@@ -27,12 +28,12 @@ describe('TrustedRecipientsList', () => {
     submitAddTrustedRecipient.mockReset();
     buildRemoveTrustedRecipient.mockReset();
     submitRemoveTrustedRecipient.mockReset();
-    signWithPasskey.mockReset();
+    signXdr.mockReset();
   });
 
   it('adds a recipient successfully', async () => {
     buildAddTrustedRecipient.mockResolvedValue({ xdr: 'unsigned' });
-    signWithPasskey.mockResolvedValue('signed');
+    signXdr.mockResolvedValue('signed');
     submitAddTrustedRecipient.mockResolvedValue(undefined);
     const onChanged = vi.fn();
 
@@ -44,7 +45,7 @@ describe('TrustedRecipientsList', () => {
     fireEvent.click(screen.getByRole('button', { name: /^add$/i }));
 
     await waitFor(() => expect(onChanged).toHaveBeenCalled());
-    expect(buildAddTrustedRecipient).toHaveBeenCalledWith('GWALLET', 'GRECIPIENT', expect.any(String));
+    expect(buildAddTrustedRecipient).toHaveBeenCalledWith('GWALLET', 'GRECIPIENT', undefined);
     expect(submitAddTrustedRecipient).toHaveBeenCalledWith('signed');
   });
 
@@ -62,7 +63,7 @@ describe('TrustedRecipientsList', () => {
 
   it('removes an existing recipient successfully', async () => {
     buildRemoveTrustedRecipient.mockResolvedValue({ xdr: 'unsigned' });
-    signWithPasskey.mockResolvedValue('signed');
+    signXdr.mockResolvedValue('signed');
     submitRemoveTrustedRecipient.mockResolvedValue(undefined);
     const onChanged = vi.fn();
 
@@ -76,7 +77,7 @@ describe('TrustedRecipientsList', () => {
     expect(buildRemoveTrustedRecipient).toHaveBeenCalledWith(
       'GWALLET',
       'GRECIPIENTONE',
-      expect.any(String),
+      undefined,
     );
   });
 

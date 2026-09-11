@@ -2,8 +2,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { wardenClient } from '@/lib/wardenClient';
-import { signWithPasskey } from '@/lib/passkeyWallet';
-import { CONFIG } from '@/lib/config';
+import { signXdr, sourceAccountOverride } from '@/lib/wallet';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -44,9 +43,9 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
           newRecipientRequiresStepUp,
           trustedRecipients: [],
         },
-        CONFIG.deployerPublicKey,
+        sourceAccountOverride(),
       );
-      const signedXdr = await signWithPasskey(xdr);
+      const signedXdr = await signXdr(xdr);
       await wardenClient.submitSetPolicy(signedXdr);
       setStatus('success');
       onSaved?.();
@@ -71,7 +70,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
           className="tabular-amount rounded-md border border-ink-700 bg-ink-800 px-4 py-2.5 text-mist-100 outline-none focus-visible:border-edge"
         />
         <p className="text-sm text-mist-400">
-          Transfers under this amount go through with just your usual passkey confirmation.
+          Transfers under this amount go through with just your usual wallet confirmation.
         </p>
       </div>
 

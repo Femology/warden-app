@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { connectedWalletId } from '@/lib/passkeyWallet';
+import { connectedWalletId } from '@/lib/wallet';
 import { TransferForm } from '@/components/TransferForm';
 
 export default function TransferPage() {

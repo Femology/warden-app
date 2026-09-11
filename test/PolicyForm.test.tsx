@@ -4,7 +4,7 @@ import { PolicyForm } from '@/components/PolicyForm';
 
 const buildSetPolicy = vi.fn();
 const submitSetPolicy = vi.fn();
-const signWithPasskey = vi.fn();
+const signXdr = vi.fn();
 
 vi.mock('@/lib/wardenClient', () => ({
   wardenClient: {
@@ -13,15 +13,16 @@ vi.mock('@/lib/wardenClient', () => ({
   },
 }));
 
-vi.mock('@/lib/passkeyWallet', () => ({
-  signWithPasskey: (...args: unknown[]) => signWithPasskey(...args),
+vi.mock('@/lib/wallet', () => ({
+  signXdr: (...args: unknown[]) => signXdr(...args),
+  sourceAccountOverride: () => undefined,
 }));
 
 describe('PolicyForm', () => {
   beforeEach(() => {
     buildSetPolicy.mockReset();
     submitSetPolicy.mockReset();
-    signWithPasskey.mockReset();
+    signXdr.mockReset();
   });
 
   it('disables submit and shows an error when the daily limit is below the no-confirmation amount', () => {
@@ -43,7 +44,7 @@ describe('PolicyForm', () => {
 
   it('submits successfully with valid values', async () => {
     buildSetPolicy.mockResolvedValue({ xdr: 'unsigned-xdr' });
-    signWithPasskey.mockResolvedValue('signed-xdr');
+    signXdr.mockResolvedValue('signed-xdr');
     submitSetPolicy.mockResolvedValue(undefined);
 
     render(<PolicyForm wallet="GTESTWALLET" />);
@@ -61,9 +62,9 @@ describe('PolicyForm', () => {
     expect(buildSetPolicy).toHaveBeenCalledWith(
       'GTESTWALLET',
       expect.objectContaining({ maxAmountNoStepUp: '150', dailyVelocityCap: '500' }),
-      expect.any(String),
+      undefined,
     );
-    expect(signWithPasskey).toHaveBeenCalledWith('unsigned-xdr');
+    expect(signXdr).toHaveBeenCalledWith('unsigned-xdr');
     expect(submitSetPolicy).toHaveBeenCalledWith('signed-xdr');
   });
 

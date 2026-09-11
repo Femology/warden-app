@@ -4,8 +4,8 @@ import { TransferForm } from '@/components/TransferForm';
 
 const buildEvaluate = vi.fn();
 const submitEvaluate = vi.fn();
-const signWithPasskey = vi.fn();
-const signWithPasskeyFor = vi.fn();
+const signXdr = vi.fn();
+const signXdrFor = vi.fn();
 const buildTransfer = vi.fn();
 const submitTransfer = vi.fn();
 
@@ -16,9 +16,10 @@ vi.mock('@/lib/wardenClient', () => ({
   },
 }));
 
-vi.mock('@/lib/passkeyWallet', () => ({
-  signWithPasskey: (...args: unknown[]) => signWithPasskey(...args),
-  signWithPasskeyFor: (...args: unknown[]) => signWithPasskeyFor(...args),
+vi.mock('@/lib/wallet', () => ({
+  signXdr: (...args: unknown[]) => signXdr(...args),
+  signXdrFor: (...args: unknown[]) => signXdrFor(...args),
+  sourceAccountOverride: () => undefined,
 }));
 
 vi.mock('@/lib/tokenClient', () => ({
@@ -36,18 +37,18 @@ describe('TransferForm', () => {
   beforeEach(() => {
     buildEvaluate.mockReset();
     submitEvaluate.mockReset();
-    signWithPasskey.mockReset();
-    signWithPasskeyFor.mockReset();
+    signXdr.mockReset();
+    signXdrFor.mockReset();
     buildTransfer.mockReset();
     submitTransfer.mockReset();
   });
 
   it('executes payment directly on an Allow decision, with no modal', async () => {
     buildEvaluate.mockResolvedValue({ xdr: 'unsigned-eval' });
-    signWithPasskey.mockResolvedValue('signed-eval');
+    signXdr.mockResolvedValue('signed-eval');
     submitEvaluate.mockResolvedValue({ type: 'Allow' });
     buildTransfer.mockResolvedValue({ xdr: 'unsigned-pay' });
-    signWithPasskeyFor.mockResolvedValue('signed-pay');
+    signXdrFor.mockResolvedValue('signed-pay');
     submitTransfer.mockResolvedValue('deadbeef');
 
     render(<TransferForm wallet="GWALLET" />);
@@ -63,10 +64,10 @@ describe('TransferForm', () => {
 
   it('shows the step-up modal on RequireStepUp and pays only after confirm', async () => {
     buildEvaluate.mockResolvedValue({ xdr: 'unsigned-eval' });
-    signWithPasskey.mockResolvedValue('signed-eval');
+    signXdr.mockResolvedValue('signed-eval');
     submitEvaluate.mockResolvedValue({ type: 'RequireStepUp', reason: 'AmountExceeded' });
     buildTransfer.mockResolvedValue({ xdr: 'unsigned-pay' });
-    signWithPasskeyFor.mockResolvedValue('signed-pay');
+    signXdrFor.mockResolvedValue('signed-pay');
     submitTransfer.mockResolvedValue('deadbeef');
 
     render(<TransferForm wallet="GWALLET" />);
@@ -85,7 +86,7 @@ describe('TransferForm', () => {
 
   it('fully aborts on cancel -- no payment, no partial state', async () => {
     buildEvaluate.mockResolvedValue({ xdr: 'unsigned-eval' });
-    signWithPasskey.mockResolvedValue('signed-eval');
+    signXdr.mockResolvedValue('signed-eval');
     submitEvaluate.mockResolvedValue({ type: 'RequireStepUp', reason: 'NewRecipient' });
 
     render(<TransferForm wallet="GWALLET" />);
@@ -103,7 +104,7 @@ describe('TransferForm', () => {
 
   it('dismisses the step-up modal on Escape, aborting the same way as Cancel', async () => {
     buildEvaluate.mockResolvedValue({ xdr: 'unsigned-eval' });
-    signWithPasskey.mockResolvedValue('signed-eval');
+    signXdr.mockResolvedValue('signed-eval');
     submitEvaluate.mockResolvedValue({ type: 'RequireStepUp', reason: 'VelocityExceeded' });
 
     render(<TransferForm wallet="GWALLET" />);

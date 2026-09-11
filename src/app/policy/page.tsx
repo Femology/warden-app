@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { connectedWalletId } from '@/lib/passkeyWallet';
+import { connectedWalletId } from '@/lib/wallet';
 import { wardenClient } from '@/lib/wardenClient';
 import { PolicyForm } from '@/components/PolicyForm';
 import { TrustedRecipientsList } from '@/components/TrustedRecipientsList';

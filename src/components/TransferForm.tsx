@@ -3,9 +3,8 @@
 import { useState, type FormEvent } from 'react';
 import type { StepUpReason } from 'warden-sdk';
 import { wardenClient } from '@/lib/wardenClient';
-import { signWithPasskey, signWithPasskeyFor } from '@/lib/passkeyWallet';
+import { signXdr, signXdrFor, sourceAccountOverride } from '@/lib/wallet';
 import { buildTransfer, submitTransfer, tokenAssembledFromXdr } from '@/lib/tokenClient';
-import { CONFIG } from '@/lib/config';
 import { StepUpConfirmModal } from './StepUpConfirmModal';
 
 type Status = 'idle' | 'evaluating' | 'awaiting-confirmation' | 'paying' | 'success' | 'error';
@@ -26,7 +25,7 @@ export function TransferForm({ wallet }: TransferFormProps) {
     setStatus('paying');
     try {
       const { xdr } = await buildTransfer(wallet, recipient, amount);
-      const signedXdr = await signWithPasskeyFor(xdr, tokenAssembledFromXdr);
+      const signedXdr = await signXdrFor(xdr, tokenAssembledFromXdr);
       const hash = await submitTransfer(signedXdr);
       setTxHash(hash);
       setStatus('success');
@@ -48,9 +47,9 @@ export function TransferForm({ wallet }: TransferFormProps) {
         wallet,
         recipient,
         amount,
-        CONFIG.deployerPublicKey,
+        sourceAccountOverride(),
       );
-      const signedXdr = await signWithPasskey(xdr);
+      const signedXdr = await signXdr(xdr);
       const decision = await wardenClient.submitEvaluate(signedXdr);
 
       if (decision.type === 'Allow') {

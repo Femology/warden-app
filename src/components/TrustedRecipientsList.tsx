@@ -2,8 +2,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { wardenClient } from '@/lib/wardenClient';
-import { signWithPasskey } from '@/lib/passkeyWallet';
-import { CONFIG } from '@/lib/config';
+import { signXdr, sourceAccountOverride } from '@/lib/wallet';
 
 type ActionStatus = 'idle' | 'submitting' | 'error';
 
@@ -30,9 +29,9 @@ export function TrustedRecipientsList({ wallet, recipients, onChanged }: Trusted
       const { xdr } = await wardenClient.buildAddTrustedRecipient(
         wallet,
         newRecipient,
-        CONFIG.deployerPublicKey,
+        sourceAccountOverride(),
       );
-      const signedXdr = await signWithPasskey(xdr);
+      const signedXdr = await signXdr(xdr);
       await wardenClient.submitAddTrustedRecipient(signedXdr);
       setNewRecipient('');
       setAddStatus('idle');
@@ -50,9 +49,9 @@ export function TrustedRecipientsList({ wallet, recipients, onChanged }: Trusted
       const { xdr } = await wardenClient.buildRemoveTrustedRecipient(
         wallet,
         recipient,
-        CONFIG.deployerPublicKey,
+        sourceAccountOverride(),
       );
-      const signedXdr = await signWithPasskey(xdr);
+      const signedXdr = await signXdr(xdr);
       await wardenClient.submitRemoveTrustedRecipient(signedXdr);
       onChanged?.();
     } catch (err) {
