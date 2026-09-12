@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import type { StepUpReason } from 'warden-sdk';
+import { useEffect, useRef, useState } from 'react';
+import { fallbackExplanation } from 'warden-sdk';
+import type { ExplanationInput, ExplanationResult, StepUpReason } from 'warden-sdk';
 
 const REASON_COPY: Record<StepUpReason, string> = {
   AmountExceeded: 'This amount is above your no-confirmation limit.',
@@ -14,13 +15,42 @@ const REASON_COPY: Record<StepUpReason, string> = {
 
 interface StepUpConfirmModalProps {
   reason: StepUpReason;
+  amount: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-export function StepUpConfirmModal({ reason, onConfirm, onCancel }: StepUpConfirmModalProps) {
+export function StepUpConfirmModal({ reason, amount, onConfirm, onCancel }: StepUpConfirmModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const confirmButtonRef = useRef<HTMLButtonElement>(null);
+  const [explanation, setExplanation] = useState<ExplanationResult | null>(null);
+  const [explaining, setExplaining] = useState(false);
+
+  // Phase 18 -- "Explain this". Sends ONLY the reason code and amount (the
+  // exact facts already public in this step-up decision) to the server
+  // route, which is the only place that ever touches the model API key.
+  // If the route is unreachable at all (not just a bad response -- the
+  // route itself already falls back for that), fallbackExplanation() runs
+  // client-side too, since it's pure, secret-free logic re-exported from
+  // warden-sdk for exactly this reason.
+  async function handleExplain() {
+    setExplaining(true);
+    const input: ExplanationInput = { eventType: 'stepup_required', reason, amount };
+    try {
+      const response = await fetch('/api/explain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(input),
+      });
+      if (!response.ok) throw new Error('explain route failed');
+      const result = (await response.json()) as ExplanationResult;
+      setExplanation(result);
+    } catch {
+      setExplanation({ ...fallbackExplanation(input), source: 'fallback' });
+    } finally {
+      setExplaining(false);
+    }
+  }
 
   // Focus-trapped, Escape-dismissible, returns focus on close -- the modal
   // deserves the most considered treatment in the product: this is the
@@ -89,6 +119,42 @@ export function StepUpConfirmModal({ reason, onConfirm, onCancel }: StepUpConfir
           One more confirmation
         </h2>
         <p className="text-mist-400">{REASON_COPY[reason]}</p>
+
+        {explanation ? (
+          <div className="flex flex-col gap-3 rounded-md border border-ink-700 bg-ink-900 p-4">
+            <p className="text-sm text-mist-100">{explanation.summary}</p>
+            {explanation.factors.length > 0 && (
+              <ul className="flex flex-col gap-1 text-sm text-mist-400">
+                {explanation.factors.map((factor, index) => (
+                  <li key={index}>• {factor}</li>
+                ))}
+              </ul>
+            )}
+            {explanation.nextSteps.length > 0 && (
+              <div className="flex flex-col gap-1">
+                <span className="text-xs font-medium text-mist-400">What you can do</span>
+                <ul className="flex flex-col gap-1 text-sm text-mist-400">
+                  {explanation.nextSteps.map((step, index) => (
+                    <li key={index}>• {step}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <span className="text-xs text-mist-400">
+              {explanation.source === 'llm' ? 'AI-generated, grounded in this event only' : 'Standard explanation'}
+            </span>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleExplain}
+            disabled={explaining}
+            className="self-start text-sm text-mist-400 underline decoration-dotted hover:text-mist-100 disabled:opacity-50"
+          >
+            {explaining ? 'Explaining…' : 'Explain this'}
+          </button>
+        )}
+
         <div className="flex justify-end gap-3">
           <button
             type="button"

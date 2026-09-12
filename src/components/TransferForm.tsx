@@ -142,6 +142,7 @@ export function TransferForm({ wallet }: TransferFormProps) {
       {status === 'awaiting-confirmation' && stepUpReason && (
         <StepUpConfirmModal
           reason={stepUpReason}
+          amount={amount}
           onConfirm={executePayment}
           onCancel={handleCancelStepUp}
         />
