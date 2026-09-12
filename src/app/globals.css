@@ -1,25 +1,76 @@
 @import "tailwindcss";
 
 /*
- * Warden design system -- Master PRD section 6.
- *
- * Base is a deep, genuinely blue ink, not a tinted black. Allow and
- * Step-up are distinguished by temperature and weight, not by a
+ * Warden design system v2 -- see 13-warden-design-system-v2.md (warden-planning).
+ * Base is a deep forest-black, not blue-ink (v1's palette) -- a deliberate
+ * re-skin, not an incremental tweak; the two are not meant to coexist.
+ * Allow and Step-up are distinguished by temperature and weight, not by a
  * good/bad (green/red) color code -- step-up is not failure, it's the
  * system working correctly. Red (--fault) is reserved exclusively for
- * actual errors.
+ * actual errors, never a policy decision.
+ *
+ * Two-layer indirection (raw --ink-900 etc. -> Tailwind's --color-ink-900
+ * token, which just points at the raw variable) is what makes runtime theme
+ * switching work: Tailwind's generated utility classes (bg-ink-900, and so
+ * on) never need to change, only which raw values [data-theme] resolves to
+ * underneath them.
  */
-@theme {
-  --color-ink-900: #101728;
-  --color-ink-800: #18213a;
-  --color-ink-700: #232f4f;
-  --color-mist-100: #e9edf7;
-  --color-mist-400: #94a2c4;
+:root {
+  /* Dark (default) */
+  --ink-900: #0d1712;
+  --ink-800: #16251e;
+  --ink-700: #223229;
+  --mist-100: #eaf2ed;
+  --mist-400: #93a99c;
 
-  --color-clear: #2fd4a3;
-  --color-gate: #ffb020;
-  --color-fault: #ff5a52;
-  --color-edge: #6c5ce7;
+  --clear: #22c38d;
+  --gate: #f2994a;
+  --fault: #ff5a52;
+  --edge: #6c5ce7;
+}
+
+/* System preference is the default for a first-time visitor with no
+   explicit choice saved yet -- overridden either direction by an explicit
+   [data-theme], see ThemeToggle. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink-900: #fbf8f1;
+    --ink-800: #f2ede0;
+    --ink-700: #dcd3be;
+    --mist-100: #1d2a22;
+    --mist-400: #5c6b60;
+
+    --clear: #1c9c73;
+    --gate: #d97b2c;
+    --fault: #d93b33;
+    --edge: #5a4bc4;
+  }
+}
+
+:root[data-theme="light"] {
+  --ink-900: #fbf8f1;
+  --ink-800: #f2ede0;
+  --ink-700: #dcd3be;
+  --mist-100: #1d2a22;
+  --mist-400: #5c6b60;
+
+  --clear: #1c9c73;
+  --gate: #d97b2c;
+  --fault: #d93b33;
+  --edge: #5a4bc4;
+}
+
+@theme {
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-mist-100: var(--mist-100);
+  --color-mist-400: var(--mist-400);
+
+  --color-clear: var(--clear);
+  --color-gate: var(--gate);
+  --color-fault: var(--fault);
+  --color-edge: var(--edge);
 
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
@@ -27,13 +78,16 @@
 }
 
 html {
-  color-scheme: dark;
+  /* Both supported -- native form controls/scrollbars should still follow
+     whichever theme is actually active, not always dark. */
+  color-scheme: dark light;
 }
 
 body {
   background-color: var(--color-ink-900);
   color: var(--color-mist-100);
   font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Tabular figures for every amount, balance, and limit -- non-negotiable,
@@ -52,6 +106,15 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-edge);
   outline-offset: 2px;
+}
+
+/* Glassmorphism, scoped per the design system's own rule: header and footer
+   chrome only, never a content card holding real data (13-warden-design-
+   system-v2.md §4). */
+.glass-chrome {
+  background-color: color-mix(in oklab, var(--color-ink-900) 72%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 @media (prefers-reduced-motion: reduce) {

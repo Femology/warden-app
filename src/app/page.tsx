@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ConnectWallet } from '@/components/ConnectWallet';
 
 const DEMO_LIMIT = 500;
 const MAX_DRAG = 1000;
@@ -37,12 +36,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/illustrations/landing/bg-texture-noise.png')", backgroundRepeat: 'repeat' }}
       />
 
-      <header className="flex items-center justify-between">
-        <Image src="/logo/logo-lockup-dark.svg" alt="Warden" width={108} height={135} priority className="h-10 w-auto" />
-        <ConnectWallet />
-      </header>
-
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-8 pt-8">
         <div className="flex flex-col gap-3">
           <h1 className="font-display text-4xl font-semibold leading-tight text-mist-100 sm:text-5xl">
             Friction where the risk actually is.
