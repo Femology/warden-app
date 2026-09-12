@@ -7,7 +7,7 @@ Testnet, signed by a real WebAuthn passkey.**
 
 [![CI](https://github.com/Femology/warden-app/actions/workflows/ci.yml/badge.svg)](https://github.com/Femology/warden-app/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Network](https://img.shields.io/badge/network-Stellar%20Testnet-7D00FF)](https://stellar.expert/explorer/testnet/contract/CD25U7GYDNB7XUBEEN3OKZK2LY62ANSUJJPQ6SF2Y6DHQ5SQ3F7LSVUF)
+[![Network](https://img.shields.io/badge/network-Stellar%20Testnet-7D00FF)](https://stellar.expert/explorer/testnet/contract/CD5QU2E6LOKFAZFESIZSAA4IENH5SZHJVU4Y6532WNZSXPZDYRKEEVUW)
 
 [Warden org](https://github.com/Femology) · [warden-contract](https://github.com/Femology/warden-contract) · [warden-sdk](https://github.com/Femology/warden-sdk) · [warden-monitor](https://github.com/Femology/warden-monitor) · [Discussions](https://github.com/Femology/warden-app/discussions)
 
