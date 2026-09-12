@@ -8,11 +8,26 @@ type ActionStatus = 'idle' | 'submitting' | 'error';
 
 interface TrustedRecipientsListProps {
   wallet: string;
-  recipients: string[];
+  // address -> last_paid_at (unix seconds). A recipient can still be in this
+  // map after it's decayed out of trust (trust_decay_seconds elapsed since
+  // last_paid_at) -- the contract keeps the entry, it just stops counting as
+  // trusted for the new-recipient check until another payment refreshes it.
+  recipients: Record<string, bigint>;
+  trustDecaySeconds: bigint;
   onChanged?: () => void;
 }
 
-export function TrustedRecipientsList({ wallet, recipients, onChanged }: TrustedRecipientsListProps) {
+function isActivelyTrusted(lastPaidAt: bigint, trustDecaySeconds: bigint): boolean {
+  const nowSeconds = BigInt(Math.floor(Date.now() / 1000));
+  return nowSeconds - lastPaidAt <= trustDecaySeconds;
+}
+
+export function TrustedRecipientsList({
+  wallet,
+  recipients,
+  trustDecaySeconds,
+  onChanged,
+}: TrustedRecipientsListProps) {
   const [newRecipient, setNewRecipient] = useState('');
   const [addStatus, setAddStatus] = useState<ActionStatus>('idle');
   const [addError, setAddError] = useState<string | null>(null);
@@ -65,31 +80,41 @@ export function TrustedRecipientsList({ wallet, recipients, onChanged }: Trusted
     <div className="flex flex-col gap-4">
       <h2 className="font-display text-lg font-semibold text-mist-100">Trusted recipients</h2>
 
-      {recipients.length === 0 ? (
+      {Object.keys(recipients).length === 0 ? (
         <p className="text-sm text-mist-400">
           No trusted recipients yet. Add one below so transfers to them skip the new-recipient
           confirmation.
         </p>
       ) : (
         <ul className="flex flex-col gap-2">
-          {recipients.map((recipient) => (
-            <li
-              key={recipient}
-              className="flex items-center justify-between gap-3 rounded-md border border-ink-700 bg-ink-800 px-4 py-2.5"
-            >
-              <span className="address-mono text-sm text-mist-100">
-                {recipient.slice(0, 6)}…{recipient.slice(-6)}
-              </span>
-              <button
-                type="button"
-                onClick={() => handleRemove(recipient)}
-                disabled={removingId === recipient}
-                className="text-sm text-mist-400 underline decoration-dotted hover:text-fault disabled:opacity-50"
+          {Object.entries(recipients).map(([recipient, lastPaidAt]) => {
+            const trusted = isActivelyTrusted(lastPaidAt, trustDecaySeconds);
+            return (
+              <li
+                key={recipient}
+                className="flex items-center justify-between gap-3 rounded-md border border-ink-700 bg-ink-800 px-4 py-2.5"
               >
-                {removingId === recipient ? 'Removing…' : 'Remove'}
-              </button>
-            </li>
-          ))}
+                <div className="flex flex-col gap-0.5">
+                  <span className="address-mono text-sm text-mist-100">
+                    {recipient.slice(0, 6)}…{recipient.slice(-6)}
+                  </span>
+                  <span className="text-xs" style={{ color: trusted ? 'var(--color-clear)' : 'var(--color-gate)' }}>
+                    {trusted
+                      ? `Last paid ${new Date(Number(lastPaidAt) * 1000).toLocaleDateString()}`
+                      : 'Trust decayed — next transfer will need confirmation'}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleRemove(recipient)}
+                  disabled={removingId === recipient}
+                  className="text-sm text-mist-400 underline decoration-dotted hover:text-fault disabled:opacity-50"
+                >
+                  {removingId === recipient ? 'Removing…' : 'Remove'}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       )}
       {removeError && (

@@ -16,7 +16,7 @@
     "passkey-kit": "0.18.3",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "warden-sdk": "github:Femology/warden-sdk#v0.1.3"
+    "warden-sdk": "github:Femology/warden-sdk#v0.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

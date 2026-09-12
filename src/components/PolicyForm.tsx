@@ -14,18 +14,26 @@ interface PolicyFormProps {
 export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
   const [maxNoStepUp, setMaxNoStepUp] = useState('150');
   const [dailyVelocityCap, setDailyVelocityCap] = useState('500');
+  const [hourlyVelocityCap, setHourlyVelocityCap] = useState('200');
   const [newRecipientRequiresStepUp, setNewRecipientRequiresStepUp] = useState(true);
+  // 30 days -- a trusted recipient you haven't paid in that long goes back
+  // to being treated as new.
+  const [trustDecayDays, setTrustDecayDays] = useState('30');
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
 
-  // Mirrors the contract's own InvalidPolicyParams rule client-side, so the
+  // Mirrors the contract's own InvalidPolicyParams rules client-side, so the
   // user gets instant feedback instead of a failed on-chain call.
   const capBelowMax =
     maxNoStepUp !== '' &&
     dailyVelocityCap !== '' &&
     Number(dailyVelocityCap) < Number(maxNoStepUp);
+  const hourlyAboveDaily =
+    hourlyVelocityCap !== '' &&
+    dailyVelocityCap !== '' &&
+    Number(hourlyVelocityCap) > Number(dailyVelocityCap);
   const negativeMax = maxNoStepUp !== '' && Number(maxNoStepUp) < 0;
-  const isInvalid = capBelowMax || negativeMax;
+  const isInvalid = capBelowMax || hourlyAboveDaily || negativeMax;
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -40,8 +48,10 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
           version: 1,
           maxAmountNoStepUp: maxNoStepUp,
           dailyVelocityCap,
+          hourlyVelocityCap,
           newRecipientRequiresStepUp,
           trustedRecipients: [],
+          trustDecaySeconds: Number(trustDecayDays) * 86_400,
         },
         sourceAccountOverride(),
       );
@@ -93,6 +103,53 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
             Your daily limit can&apos;t be less than your no-confirmation amount.
           </p>
         )}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="hourlyVelocityCap" className="text-sm font-medium text-mist-100">
+          Hourly limit
+        </label>
+        <input
+          id="hourlyVelocityCap"
+          type="number"
+          inputMode="decimal"
+          value={hourlyVelocityCap}
+          onChange={(event) => setHourlyVelocityCap(event.target.value)}
+          aria-invalid={hourlyAboveDaily}
+          className="tabular-amount rounded-md border bg-ink-800 px-4 py-2.5 text-mist-100 outline-none focus-visible:border-edge"
+          style={{ borderColor: hourlyAboveDaily ? 'var(--color-fault)' : 'var(--color-ink-700)' }}
+        />
+        <p className="text-sm text-mist-400">
+          A tighter cap inside each hour, so a burst can trigger confirmation even while
+          you&apos;re still under your daily limit.
+        </p>
+        {hourlyAboveDaily && (
+          <p role="alert" className="text-sm text-fault">
+            Your hourly limit can&apos;t be more than your daily limit.
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="trustDecayDays" className="text-sm font-medium text-mist-100">
+          Trust expires after
+        </label>
+        <div className="flex items-center gap-3">
+          <input
+            id="trustDecayDays"
+            type="number"
+            inputMode="numeric"
+            min="1"
+            value={trustDecayDays}
+            onChange={(event) => setTrustDecayDays(event.target.value)}
+            className="tabular-amount w-28 rounded-md border border-ink-700 bg-ink-800 px-4 py-2.5 text-mist-100 outline-none focus-visible:border-edge"
+          />
+          <span className="text-sm text-mist-400">days without a payment</span>
+        </div>
+        <p className="text-sm text-mist-400">
+          A trusted recipient you haven&apos;t paid in this long goes back to needing
+          confirmation, as if they were new.
+        </p>
       </div>
 
       <label className="flex items-center gap-3 text-sm text-mist-100">

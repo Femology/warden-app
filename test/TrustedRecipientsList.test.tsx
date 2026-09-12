@@ -37,7 +37,14 @@ describe('TrustedRecipientsList', () => {
     submitAddTrustedRecipient.mockResolvedValue(undefined);
     const onChanged = vi.fn();
 
-    render(<TrustedRecipientsList wallet="GWALLET" recipients={[]} onChanged={onChanged} />);
+    render(
+      <TrustedRecipientsList
+        wallet="GWALLET"
+        recipients={{}}
+        trustDecaySeconds={BigInt(2_592_000)}
+        onChanged={onChanged}
+      />,
+    );
 
     fireEvent.change(screen.getByLabelText(/new trusted recipient address/i), {
       target: { value: 'GRECIPIENT' },
@@ -52,7 +59,7 @@ describe('TrustedRecipientsList', () => {
   it('shows an error state when adding fails', async () => {
     buildAddTrustedRecipient.mockRejectedValue(new Error('already trusted'));
 
-    render(<TrustedRecipientsList wallet="GWALLET" recipients={[]} />);
+    render(<TrustedRecipientsList wallet="GWALLET" recipients={{}} trustDecaySeconds={BigInt(2_592_000)} />);
     fireEvent.change(screen.getByLabelText(/new trusted recipient address/i), {
       target: { value: 'GRECIPIENT' },
     });
@@ -68,7 +75,12 @@ describe('TrustedRecipientsList', () => {
     const onChanged = vi.fn();
 
     render(
-      <TrustedRecipientsList wallet="GWALLET" recipients={['GRECIPIENTONE']} onChanged={onChanged} />,
+      <TrustedRecipientsList
+        wallet="GWALLET"
+        recipients={{ GRECIPIENTONE: BigInt(1_700_000_000) }}
+        trustDecaySeconds={BigInt(2_592_000)}
+        onChanged={onChanged}
+      />,
     );
 
     fireEvent.click(screen.getByRole('button', { name: /remove/i }));
@@ -84,7 +96,13 @@ describe('TrustedRecipientsList', () => {
   it('shows an error state when removing fails', async () => {
     buildRemoveTrustedRecipient.mockRejectedValue(new Error('not trusted'));
 
-    render(<TrustedRecipientsList wallet="GWALLET" recipients={['GRECIPIENTONE']} />);
+    render(
+      <TrustedRecipientsList
+        wallet="GWALLET"
+        recipients={{ GRECIPIENTONE: BigInt(1_700_000_000) }}
+        trustDecaySeconds={BigInt(2_592_000)}
+      />,
+    );
     fireEvent.click(screen.getByRole('button', { name: /remove/i }));
 
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('not trusted'));

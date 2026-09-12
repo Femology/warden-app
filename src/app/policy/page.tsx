@@ -68,6 +68,7 @@ export default function PolicyPage() {
             <TrustedRecipientsList
               wallet={wallet}
               recipients={policy.trustedRecipients}
+              trustDecaySeconds={policy.trustDecaySeconds}
               onChanged={() => refresh(wallet)}
             />
           )}

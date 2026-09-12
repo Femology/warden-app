@@ -5,8 +5,10 @@ import type { StepUpReason } from 'warden-sdk';
 
 const REASON_COPY: Record<StepUpReason, string> = {
   AmountExceeded: 'This amount is above your no-confirmation limit.',
-  NewRecipient: "You haven't sent to this recipient before.",
+  NewRecipient:
+    "You haven't sent to this recipient before, or it's been long enough that we're treating it like a new one.",
   VelocityExceeded: 'This would put you over your daily limit.',
+  HourlyVelocityExceeded: 'This would put you over your hourly limit.',
 };
 
 interface StepUpConfirmModalProps {
