@@ -9,6 +9,7 @@ const REASON_COPY: Record<StepUpReason, string> = {
     "You haven't sent to this recipient before, or it's been long enough that we're treating it like a new one.",
   VelocityExceeded: 'This would put you over your daily limit.',
   HourlyVelocityExceeded: 'This would put you over your hourly limit.',
+  FlaggedRecipient: 'This recipient has been flagged and always requires confirmation.',
 };
 
 interface StepUpConfirmModalProps {
