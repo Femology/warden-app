@@ -71,6 +71,7 @@ deployment.
 | `NEXT_PUBLIC_WARDEN_WALLET_WASM_HASH` | passkey-kit smart-wallet wasm hash |
 | `NEXT_PUBLIC_WARDEN_DEPLOYER_PUBLIC_KEY` | Public fee/sequence-paying account (see below) |
 | `WARDEN_DEPLOYER_SECRET` | **Server-only.** Matching secret key. Never exposed client-side. |
+| `EVOMAP_API_KEY` | **Server-only, optional.** Phase 18's "Explain this" feature (`/api/explain`) -- Evomap's OpenAI-compatible endpoint, model `evomap-deepseek-v4-flash`. Read only by that one route, never sent to the browser. If unset, the route still works: it always returns the pre-written fallback explanation instead of calling the model, so this app functions correctly with or without it. |
 
 ### Why there's a server-side deployer key at all
 
