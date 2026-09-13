@@ -21,19 +21,14 @@ a risk-policy engine for Stellar smart wallets. This app proves the decision log
 end to end on Testnet: connect a passkey-backed smart wallet, set a policy, and send a
 transfer that either goes straight through or asks for one more confirmation.
 
-## Important limitation -- read this before assuming more than it claims
+## A real limitation, stated plainly
 
-**The step-up gate here is app-enforced, not cryptographically enforced.** This app asks
-`warden-contract`'s `evaluate()` for a decision and its own UI refuses to proceed
-without confirmation when the answer is `RequireStepUp` -- but nothing yet stops a
-modified client from ignoring that answer and sending the payment anyway. The actual
-payment is still authorized by the wallet's single ordinary passkey signature; there is
-no on-chain mechanism yet forcing the step-up to happen first.
-
-Registering Warden as a true smart-wallet policy signer inside the wallet's own
-`__check_auth` is the natural next step, once passkey-kit's multi-signer interface for
-that is verified against its current source -- it was not fabricated here. This is a
-real, current limitation of v1, not a bug.
+**The step-up gate is enforced by this app, not cryptographically by the wallet.** The
+app asks `warden-contract`'s `evaluate()` for a decision and refuses to proceed without
+confirmation when the answer is `RequireStepUp` -- but nothing yet stops a modified
+client from ignoring that answer. The payment itself is still authorized by the
+wallet's single ordinary passkey signature. Registering Warden as a true smart-wallet
+policy signer, inside the wallet's own auth check, is the natural next step.
 
 ## The three demo scenarios
 
@@ -71,19 +66,15 @@ deployment.
 | `NEXT_PUBLIC_WARDEN_WALLET_WASM_HASH` | passkey-kit smart-wallet wasm hash |
 | `NEXT_PUBLIC_WARDEN_DEPLOYER_PUBLIC_KEY` | Public fee/sequence-paying account (see below) |
 | `WARDEN_DEPLOYER_SECRET` | **Server-only.** Matching secret key. Never exposed client-side. |
-| `EVOMAP_API_KEY` | **Server-only, optional.** Phase 18's "Explain this" feature (`/api/explain`) -- Evomap's OpenAI-compatible endpoint, model `evomap-deepseek-v4-flash`. Read only by that one route, never sent to the browser. If unset, the route still works: it always returns the pre-written fallback explanation instead of calling the model, so this app functions correctly with or without it. |
+| `EVOMAP_API_KEY` | **Server-only, optional.** Powers the "Explain this" feature (`/api/explain`). If unset, that route falls back to pre-written explanations instead of calling a model -- the app works correctly either way. |
 
 ### Why there's a server-side deployer key at all
 
-A passkey smart wallet is a `C...` contract address, which cannot itself be a
-transaction envelope source (only classic `G...` accounts hold a sequence number). Every
-transaction in this app is built with a funded Testnet account (`WARDEN_DEPLOYER_SECRET`)
-as the fee/sequence source, while the connected smart wallet remains the address whose
-own Soroban auth entry is actually checked by the contract -- signed by the user's
-passkey via `passkey-kit`, never by the deployer. Two API routes (`/api/co-sign`,
-`/api/submit-wallet-creation`) add the deployer's own envelope signature server-side;
-they never touch or see the user's passkey signature, and the deployer's secret never
-reaches the browser.
+A passkey smart wallet is a contract address, which can't itself pay transaction fees
+or hold a sequence number -- only a classic account can. Every transaction here is
+built with a funded Testnet account (`WARDEN_DEPLOYER_SECRET`) as the fee/sequence
+source, while the connected smart wallet remains the address whose own signature is
+actually checked by the contract. The deployer's secret never reaches the browser.
 
 ## Architecture
 
