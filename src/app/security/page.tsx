@@ -333,7 +333,7 @@ export default function SecurityPage() {
             <p>
               <strong className="text-mist-100">2. Self-Custody Invariants:</strong> Blockchain transactions are mathematically
               irreversible. If you configure a $10,000 daily speed limit and sign a transfer to an untrusted recipient, no
-              centralized entity—not Warden, not the Stellar Development Foundation, and not a bank—can recall the funds.
+              centralized entity (not Warden, not the Stellar Development Foundation, and not a bank) can recall the funds.
             </p>
             <p>
               <strong className="text-mist-100">3. Responsible Disclosure:</strong> If you are a security researcher and

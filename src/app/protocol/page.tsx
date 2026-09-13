@@ -29,7 +29,7 @@ export default function ProtocolPage() {
 
       <main className="mx-auto flex max-w-5xl flex-col gap-28 px-6 py-8 sm:py-16">
         {/* =========================================================================
-            ACT I: THE HERO — "THE ALL-OR-NOTHING FLAW"
+            ACT I: THE HERO - "THE ALL-OR-NOTHING FLAW"
         ========================================================================= */}
         <section className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-ink-700 bg-ink-800 px-4 py-1.5 text-xs font-mono text-mist-400 shadow-sm">
@@ -109,7 +109,7 @@ export default function ProtocolPage() {
         </section>
 
         {/* =========================================================================
-            ACT II: THE FALSE DICHOTOMY — "THE TWO BROKEN EXTREMES"
+            ACT II: THE FALSE DICHOTOMY - "THE TWO BROKEN EXTREMES"
         ========================================================================= */}
         <section className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
@@ -308,7 +308,7 @@ export default function ProtocolPage() {
                     sounds.playRatchetTick();
                     setMonthlyTransfers(Number(e.target.value));
                   }}
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-clear outline-none"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-clear outline-none focus-visible:ring-2 focus-visible:ring-clear/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
                 />
 
                 <div className="flex justify-between text-xs font-mono">
@@ -325,7 +325,7 @@ export default function ProtocolPage() {
                     sounds.playRatchetTick();
                     setAvgTransferAmount(Number(e.target.value));
                   }}
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-clear outline-none"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-clear outline-none focus-visible:ring-2 focus-visible:ring-clear/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
                 />
               </div>
 
@@ -364,7 +364,7 @@ export default function ProtocolPage() {
         </section>
 
         {/* =========================================================================
-            ACT IV: THE PUBLIC GOOD MANIFESTO — "WHY THERE IS NO WARDEN TOKEN"
+            ACT IV: THE PUBLIC GOOD MANIFESTO - "WHY THERE IS NO WARDEN TOKEN"
         ========================================================================= */}
         <section className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">

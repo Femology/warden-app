@@ -205,7 +205,7 @@ export default function AuditTrailPage() {
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
         <div
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #22C38D 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--clear) 0%, transparent 70%)' }}
         />
       </div>
 

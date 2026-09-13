@@ -162,7 +162,7 @@ export function ThreatInspector() {
               max={100}
               value={anomalousPercent}
               onChange={(e) => handleSliderChange(Number(e.target.value))}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-edge outline-none"
+              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-edge outline-none focus-visible:ring-2 focus-visible:ring-edge/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
             />
             <div className="flex justify-between text-[11px] text-mist-400">
               <span>0% (Known Device)</span>

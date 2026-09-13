@@ -26,13 +26,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Warden — Smart Account Security Operating System',
+  title: 'Warden - Smart Account Security Operating System',
   description:
     'An on-chain spending governor on Stellar Soroban that lets honest daily purchases glide through in seconds, while halting abnormal account drains before funds ever leave your vault.',
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.svg',
-    apple: '/logo/warden-shield-3d.png',
+    apple: '/logo/warden-shield-3d.jpg',
   },
 };
 

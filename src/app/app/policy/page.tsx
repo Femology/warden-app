@@ -67,16 +67,16 @@ export default function AppPolicyPage() {
   const effectiveWallet = wallet || (isDemoMode ? 'GCZLWARDENSANDBOX7ACCOUNTDEMO9TESTNET' : undefined);
 
   return (
-    <div className="relative min-h-screen bg-[#0D1712] text-[#EAF2ED] pb-32 pt-8 sm:pt-12 overflow-x-hidden">
+    <div className="relative min-h-screen bg-ink-900 text-mist-100 pb-32 pt-8 sm:pt-12 overflow-x-hidden">
       {/* Ambient background lighting */}
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
         <div
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #22C38D 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--clear) 0%, transparent 70%)' }}
         />
         <div
           className="absolute top-1/2 right-0 h-[450px] w-[650px] rounded-full blur-[150px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #F2994A 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--gate) 0%, transparent 70%)' }}
         />
       </div>
 
@@ -84,16 +84,16 @@ export default function AppPolicyPage() {
         {/* =====================================================================
             HEADER & STATE STRIP
         ===================================================================== */}
-        <div className="flex flex-col gap-4 border-b border-[#223229] pb-8">
+        <div className="flex flex-col gap-4 border-b border-ink-700 pb-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex flex-col gap-1">
               <div className="inline-flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#22C38D] animate-pulse" />
-                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#22C38D]">
+                <span className="h-2 w-2 rounded-full bg-clear animate-pulse" />
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-clear">
                   POLICY MANAGEMENT // PROTOCOL V1.0.0
                 </span>
               </div>
-              <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#EAF2ED] tracking-tight">
+              <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-mist-100 tracking-tight">
                 Configure Spending Boundaries
               </h1>
             </div>
@@ -101,25 +101,25 @@ export default function AppPolicyPage() {
             <div className="flex items-center gap-3">
               <Link
                 href="/app"
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#223229] bg-[#16251E] px-4 py-1.5 font-mono text-xs text-[#93A99C] hover:border-[#22C38D] hover:text-[#EAF2ED] transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-full border border-ink-700 bg-ink-800 px-4 py-1.5 font-mono text-xs text-mist-400 hover:border-clear hover:text-mist-100 transition-colors"
               >
                 <span>← Command Center</span>
               </Link>
             </div>
           </div>
 
-          <p className="text-sm sm:text-base text-[#93A99C] max-w-3xl leading-relaxed">
+          <p className="text-sm sm:text-base text-mist-400 max-w-3xl leading-relaxed">
             Define your on-chain rules. Payments within these boundaries clear instantly in seconds;
             payments exceeding them require an explicit second confirmation.
           </p>
 
           {/* Active Status Banner */}
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#223229] bg-[#16251E] p-4 font-mono text-xs">
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-ink-700 bg-ink-800 p-4 font-mono text-xs">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
-                <span className={`h-2 w-2 rounded-full ${wallet ? 'bg-[#22C38D]' : 'bg-[#F2994A]'}`} />
-                <span className="text-[#93A99C]">Target Account:</span>
-                <span className="font-bold text-[#EAF2ED]">
+                <span className={`h-2 w-2 rounded-full ${wallet ? 'bg-clear' : 'bg-gate'}`} />
+                <span className="text-mist-400">Target Account:</span>
+                <span className="font-bold text-mist-100">
                   {wallet
                     ? `${wallet.slice(0, 6)}…${wallet.slice(-6)}`
                     : isDemoMode
@@ -127,7 +127,7 @@ export default function AppPolicyPage() {
                     : 'No Wallet Connected'}
                 </span>
               </div>
-              <span className="rounded-full bg-[#22C38D]/15 px-2.5 py-0.5 text-[10px] font-bold text-[#22C38D]">
+              <span className="rounded-full bg-clear/15 px-2.5 py-0.5 text-[10px] font-bold text-clear">
                 TIER: NORMAL
               </span>
             </div>
@@ -138,7 +138,7 @@ export default function AppPolicyPage() {
                   type="button"
                   onClick={handleConnectWallet}
                   disabled={connecting}
-                  className="rounded-full bg-[#22C38D] px-3.5 py-1 text-[11px] font-bold text-[#0D1712] hover:bg-[#22C38D]/90 transition-colors"
+                  className="rounded-full bg-clear px-3.5 py-1 text-[11px] font-bold text-ink-900 hover:bg-clear/90 transition-colors"
                 >
                   {connecting ? 'Connecting…' : 'Connect Freighter'}
                 </button>
@@ -146,7 +146,7 @@ export default function AppPolicyPage() {
               <button
                 type="button"
                 onClick={toggleDemoMode}
-                className="rounded-full border border-[#223229] bg-[#0D1712] px-3 py-1 text-[11px] text-[#93A99C] hover:text-[#EAF2ED] hover:border-[#93A99C] transition-colors"
+                className="rounded-full border border-ink-700 bg-ink-900 px-3 py-1 text-[11px] text-mist-400 hover:text-mist-100 hover:border-mist-400 transition-colors"
               >
                 {isDemoMode ? 'Exit Demo' : 'Simulate Sandbox'}
               </button>
@@ -156,14 +156,14 @@ export default function AppPolicyPage() {
 
         {/* Loading or Error Banners */}
         {loading && (
-          <div className="flex items-center gap-2 font-mono text-sm text-[#93A99C]">
-            <span className="h-2 w-2 rounded-full bg-[#22C38D] animate-ping" />
+          <div className="flex items-center gap-2 font-mono text-sm text-mist-400">
+            <span className="h-2 w-2 rounded-full bg-clear animate-ping" />
             <span>Fetching existing on-chain policy parameters from Soroban…</span>
           </div>
         )}
 
         {error && (
-          <div className="rounded-xl border border-[#FF5A52]/40 bg-[#16251E] p-4 text-xs font-mono text-[#FF5A52]">
+          <div className="rounded-xl border border-fault/40 bg-ink-800 p-4 text-xs font-mono text-fault">
             {error}
           </div>
         )}
@@ -181,17 +181,17 @@ export default function AppPolicyPage() {
             />
 
             {/* Trusted Counterparties List Section */}
-            <section className="flex flex-col gap-4 border-t border-[#223229] pt-8">
+            <section className="flex flex-col gap-4 border-t border-ink-700 pt-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#22C38D]">
+                  <span className="font-mono text-xs font-semibold uppercase tracking-wider text-clear">
                     WEB-OF-TRUST DIRECTORY
                   </span>
-                  <h2 className="font-display text-2xl font-bold text-[#EAF2ED]">
+                  <h2 className="font-display text-2xl font-bold text-mist-100">
                     Trusted Counterparties
                   </h2>
                 </div>
-                <span className="font-mono text-xs text-[#93A99C]">
+                <span className="font-mono text-xs text-mist-400">
                   Zero step-up applies only to active trusted peers
                 </span>
               </div>
@@ -207,14 +207,14 @@ export default function AppPolicyPage() {
             </section>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-[#223229] bg-[#16251E] p-12 text-center">
-            <div className="h-12 w-12 rounded-full bg-[#22C38D]/20 flex items-center justify-center mb-4 text-2xl">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-ink-700 bg-ink-800 p-12 text-center">
+            <div className="h-12 w-12 rounded-full bg-clear/20 flex items-center justify-center mb-4 text-2xl">
               🛡️
             </div>
-            <h3 className="font-display text-xl font-bold text-[#EAF2ED] mb-2">
+            <h3 className="font-display text-xl font-bold text-mist-100 mb-2">
               Connect Your Stellar Wallet
             </h3>
-            <p className="text-sm text-[#93A99C] max-w-md mb-6 leading-relaxed">
+            <p className="text-sm text-mist-400 max-w-md mb-6 leading-relaxed">
               Connect Freighter to load your account&apos;s live on-chain security policy, or explore the editor in simulated sandbox mode.
             </p>
             <div className="flex items-center gap-4">
@@ -222,14 +222,14 @@ export default function AppPolicyPage() {
                 type="button"
                 onClick={handleConnectWallet}
                 disabled={connecting}
-                className="rounded-xl bg-[#22C38D] px-6 py-2.5 font-mono text-xs font-bold text-[#0D1712] hover:bg-[#22C38D]/90 transition-colors"
+                className="rounded-xl bg-clear px-6 py-2.5 font-mono text-xs font-bold text-ink-900 hover:bg-clear/90 transition-colors"
               >
                 {connecting ? 'Connecting…' : 'Connect Freighter'}
               </button>
               <button
                 type="button"
                 onClick={() => setIsDemoMode(true)}
-                className="rounded-xl border border-[#223229] bg-[#0D1712] px-6 py-2.5 font-mono text-xs text-[#93A99C] hover:text-[#EAF2ED] hover:border-[#93A99C] transition-colors"
+                className="rounded-xl border border-ink-700 bg-ink-900 px-6 py-2.5 font-mono text-xs text-mist-400 hover:text-mist-100 hover:border-mist-400 transition-colors"
               >
                 Load Sandbox State
               </button>

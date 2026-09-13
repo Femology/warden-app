@@ -188,11 +188,11 @@ export default function GuardianRecoveryPage() {
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
         <div
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #22C38D 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--clear) 0%, transparent 70%)' }}
         />
         <div
           className="absolute top-1/2 right-0 h-[450px] w-[650px] rounded-full blur-[150px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #F2994A 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--gate) 0%, transparent 70%)' }}
         />
       </div>
 
@@ -250,7 +250,7 @@ export default function GuardianRecoveryPage() {
                 <span className="h-2 w-2 rounded-full bg-clear" />
                 <span className="text-mist-400">Account State:</span>
                 <span className="font-bold text-clear">{accountState.toUpperCase()}</span>
-                <span className="text-mist-400">— Guardian modifications permitted on-chain.</span>
+                <span className="text-mist-400">Guardian modifications permitted on-chain.</span>
               </div>
               <span className="text-[10px] text-mist-400 hidden sm:inline">
                 48-Hour Timelock with Owner Veto Active
@@ -444,32 +444,32 @@ export default function GuardianRecoveryPage() {
             <div className="flex-shrink-0">
               <svg width="220" height="120" viewBox="0 0 220 120" fill="none">
                 {/* Central Vault Hub */}
-                <circle cx="110" cy="60" r="18" fill="#0D1712" stroke="#22C38D" strokeWidth="2" />
-                <circle cx="110" cy="60" r="6" fill="#22C38D" />
+                <circle cx="110" cy="60" r="18" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="2" />
+                <circle cx="110" cy="60" r="6" fill="var(--clear)" />
 
                 {/* Orbital Lines */}
-                <line x1="110" y1="60" x2="50" y2="30" stroke="#22C38D" strokeWidth="1.5" />
-                <line x1="110" y1="60" x2="170" y2="30" stroke="#22C38D" strokeWidth="1.5" />
-                <line x1="110" y1="60" x2="35" y2="80" stroke="#223229" strokeWidth="1" strokeDasharray="3 3" />
-                <line x1="110" y1="60" x2="185" y2="80" stroke="#223229" strokeWidth="1" strokeDasharray="3 3" />
-                <line x1="110" y1="60" x2="110" y2="105" stroke="#223229" strokeWidth="1" strokeDasharray="3 3" />
+                <line x1="110" y1="60" x2="50" y2="30" stroke="var(--clear)" strokeWidth="1.5" />
+                <line x1="110" y1="60" x2="170" y2="30" stroke="var(--clear)" strokeWidth="1.5" />
+                <line x1="110" y1="60" x2="35" y2="80" stroke="var(--ink-700)" strokeWidth="1" strokeDasharray="3 3" />
+                <line x1="110" y1="60" x2="185" y2="80" stroke="var(--ink-700)" strokeWidth="1" strokeDasharray="3 3" />
+                <line x1="110" y1="60" x2="110" y2="105" stroke="var(--ink-700)" strokeWidth="1" strokeDasharray="3 3" />
 
                 {/* Active Quorum Nodes (Green) */}
-                <circle cx="50" cy="30" r="10" fill="#0D1712" stroke="#22C38D" strokeWidth="2" />
-                <text x="50" y="33" fill="#22C38D" fontSize="8" textAnchor="middle" fontFamily="monospace">G1</text>
+                <circle cx="50" cy="30" r="10" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="2" />
+                <text x="50" y="33" fill="var(--clear)" fontSize="8" textAnchor="middle" fontFamily="monospace">G1</text>
 
-                <circle cx="170" cy="30" r="10" fill="#0D1712" stroke="#22C38D" strokeWidth="2" />
-                <text x="170" y="33" fill="#22C38D" fontSize="8" textAnchor="middle" fontFamily="monospace">G2</text>
+                <circle cx="170" cy="30" r="10" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="2" />
+                <text x="170" y="33" fill="var(--clear)" fontSize="8" textAnchor="middle" fontFamily="monospace">G2</text>
 
                 {/* Standby Nodes */}
-                <circle cx="35" cy="80" r="8" fill="#0D1712" stroke="#93A99C" strokeWidth="1" />
-                <text x="35" y="83" fill="#93A99C" fontSize="7" textAnchor="middle" fontFamily="monospace">G3</text>
+                <circle cx="35" cy="80" r="8" fill="var(--ink-900)" stroke="var(--mist-400)" strokeWidth="1" />
+                <text x="35" y="83" fill="var(--mist-400)" fontSize="7" textAnchor="middle" fontFamily="monospace">G3</text>
 
-                <circle cx="185" cy="80" r="8" fill="#0D1712" stroke="#93A99C" strokeWidth="1" />
-                <text x="185" y="83" fill="#93A99C" fontSize="7" textAnchor="middle" fontFamily="monospace">G4</text>
+                <circle cx="185" cy="80" r="8" fill="var(--ink-900)" stroke="var(--mist-400)" strokeWidth="1" />
+                <text x="185" y="83" fill="var(--mist-400)" fontSize="7" textAnchor="middle" fontFamily="monospace">G4</text>
 
-                <circle cx="110" cy="105" r="8" fill="#0D1712" stroke="#93A99C" strokeWidth="1" />
-                <text x="110" y="108" fill="#93A99C" fontSize="7" textAnchor="middle" fontFamily="monospace">G5</text>
+                <circle cx="110" cy="105" r="8" fill="var(--ink-900)" stroke="var(--mist-400)" strokeWidth="1" />
+                <text x="110" y="108" fill="var(--mist-400)" fontSize="7" textAnchor="middle" fontFamily="monospace">G5</text>
               </svg>
             </div>
           </div>

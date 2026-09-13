@@ -213,11 +213,11 @@ export default function TrustedRecipientsPage() {
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
         <div
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #22C38D 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--clear) 0%, transparent 70%)' }}
         />
         <div
           className="absolute top-1/2 right-0 h-[450px] w-[650px] rounded-full blur-[150px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #F2994A 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--gate) 0%, transparent 70%)' }}
         />
       </div>
 
@@ -428,9 +428,9 @@ export default function TrustedRecipientsPage() {
           <div className="rounded-2xl border border-ink-700 bg-ink-800 p-12 text-center flex flex-col items-center justify-center">
             <div className="my-4">
               <svg width="140" height="70" viewBox="0 0 140 70" fill="none">
-                <line x1="20" y1="35" x2="120" y2="35" stroke="#223229" strokeWidth="2" strokeDasharray="4 4" />
-                <circle cx="20" cy="35" r="10" stroke="#93A99C" strokeWidth="1.5" />
-                <circle cx="120" cy="35" r="10" stroke="#93A99C" strokeWidth="1.5" />
+                <line x1="20" y1="35" x2="120" y2="35" stroke="var(--ink-700)" strokeWidth="2" strokeDasharray="4 4" />
+                <circle cx="20" cy="35" r="10" stroke="var(--mist-400)" strokeWidth="1.5" />
+                <circle cx="120" cy="35" r="10" stroke="var(--mist-400)" strokeWidth="1.5" />
               </svg>
             </div>
             <h3 className="font-display text-xl font-bold text-mist-100 mb-2">
@@ -468,15 +468,15 @@ export default function TrustedRecipientsPage() {
 
           <div className="flex-shrink-0">
             <svg width="240" height="70" viewBox="0 0 240 70" fill="none">
-              <line x1="20" y1="35" x2="130" y2="35" stroke="#22C38D" strokeWidth="2.5" />
-              <line x1="130" y1="35" x2="220" y2="35" stroke="#F2994A" strokeWidth="2" strokeDasharray="4 3" />
-              <circle cx="20" cy="35" r="7" fill="#0D1712" stroke="#22C38D" strokeWidth="2" />
-              <circle cx="20" cy="35" r="2.5" fill="#22C38D" />
-              <circle cx="130" cy="35" r="6" fill="#0D1712" stroke="#F2994A" strokeWidth="1.5" />
-              <circle cx="220" cy="35" r="5" fill="#0D1712" stroke="#F2994A" strokeWidth="1" />
-              <text x="10" y="55" fill="#22C38D" fontSize="8" fontFamily="monospace">Day 0</text>
-              <text x="115" y="55" fill="#F2994A" fontSize="8" fontFamily="monospace">Day 20</text>
-              <text x="205" y="55" fill="#93A99C" fontSize="8" fontFamily="monospace">Day 30</text>
+              <line x1="20" y1="35" x2="130" y2="35" stroke="var(--clear)" strokeWidth="2.5" />
+              <line x1="130" y1="35" x2="220" y2="35" stroke="var(--gate)" strokeWidth="2" strokeDasharray="4 3" />
+              <circle cx="20" cy="35" r="7" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="2" />
+              <circle cx="20" cy="35" r="2.5" fill="var(--clear)" />
+              <circle cx="130" cy="35" r="6" fill="var(--ink-900)" stroke="var(--gate)" strokeWidth="1.5" />
+              <circle cx="220" cy="35" r="5" fill="var(--ink-900)" stroke="var(--gate)" strokeWidth="1" />
+              <text x="10" y="55" fill="var(--clear)" fontSize="8" fontFamily="monospace">Day 0</text>
+              <text x="115" y="55" fill="var(--gate)" fontSize="8" fontFamily="monospace">Day 20</text>
+              <text x="205" y="55" fill="var(--mist-400)" fontSize="8" fontFamily="monospace">Day 30</text>
             </svg>
           </div>
         </div>

@@ -58,17 +58,17 @@ export default function NewTransactionPage() {
 
   // Determine counterparty trust status
   const recipientStatus = useMemo(() => {
-    if (!recipient) return { badge: 'Empty', color: '#93A99C', border: '#223229', type: 'empty' };
+    if (!recipient) return { badge: 'Empty', color: 'var(--mist-400)', border: 'var(--ink-700)', type: 'empty' };
     if (recipient === FLAGGED_WALLET || recipient.toLowerCase().includes('flag') || recipient.toLowerCase().includes('scam')) {
-      return { badge: '🚫 Blacklisted', color: '#FF5A52', border: '#FF5A52', type: 'flagged' };
+      return { badge: '🚫 Blacklisted', color: 'var(--fault)', border: 'var(--fault)', type: 'flagged' };
     }
     if (recipient === TRUSTED_SUPPLIER) {
-      return { badge: '✓ Trusted Active', color: '#22C38D', border: '#22C38D', type: 'trusted' };
+      return { badge: '✓ Trusted Active', color: 'var(--clear)', border: 'var(--clear)', type: 'trusted' };
     }
     if (recipient.startsWith('GA7Q')) {
-      return { badge: '⏳ Trust Decayed', color: '#F2994A', border: '#F2994A', type: 'decayed' };
+      return { badge: '⏳ Trust Decayed', color: 'var(--gate)', border: 'var(--gate)', type: 'decayed' };
     }
-    return { badge: '⚠ Unindexed Recipient', color: '#93A99C', border: '#223229', type: 'new' };
+    return { badge: '⚠ Unindexed Recipient', color: 'var(--mist-400)', border: 'var(--ink-700)', type: 'new' };
   }, [recipient]);
 
   // Real-time pre-flight inspection
@@ -77,34 +77,34 @@ export default function NewTransactionPage() {
     if (recipientStatus.type === 'flagged') {
       return {
         text: 'Recipient is flagged on-chain. Transfer will be intercepted and blocked.',
-        color: '#FF5A52',
+        color: 'var(--fault)',
         willStepUp: true,
       };
     }
     if (num > 500) {
       return {
         text: `Amount ($${num.toFixed(2)}) exceeds daily velocity limit ($500.00). Will require multi-sig step-up.`,
-        color: '#F2994A',
+        color: 'var(--gate)',
         willStepUp: true,
       };
     }
     if (num > 150) {
       return {
         text: `Amount ($${num.toFixed(2)}) exceeds single-transaction threshold ($150.00). Will trigger biometric challenge.`,
-        color: '#F2994A',
+        color: 'var(--gate)',
         willStepUp: true,
       };
     }
     if (recipientStatus.type === 'new' || recipientStatus.type === 'decayed') {
       return {
         text: 'New or decayed recipient requires secondary confirmation for initial interaction.',
-        color: '#F2994A',
+        color: 'var(--gate)',
         willStepUp: true,
       };
     }
     return {
       text: 'Transfer is within single-tx cap ($150.00) and hourly velocity limits. Will settle instantly without step-up.',
-      color: '#22C38D',
+      color: 'var(--clear)',
       willStepUp: false,
     };
   }, [amount, recipientStatus]);
@@ -227,11 +227,11 @@ export default function NewTransactionPage() {
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
         <div
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #22C38D 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--clear) 0%, transparent 70%)' }}
         />
         <div
           className="absolute top-1/2 right-0 h-[450px] w-[650px] rounded-full blur-[150px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #F2994A 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--gate) 0%, transparent 70%)' }}
         />
       </div>
 
@@ -511,30 +511,30 @@ export default function NewTransactionPage() {
             <div className="my-6 relative flex items-center justify-center">
               <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
                 {/* Outer Ring */}
-                <circle cx="90" cy="90" r="80" stroke="#223229" strokeWidth="2" />
-                <circle cx="90" cy="90" r="70" stroke="#223229" strokeWidth="1" strokeDasharray="3 3" />
+                <circle cx="90" cy="90" r="80" stroke="var(--ink-700)" strokeWidth="2" />
+                <circle cx="90" cy="90" r="70" stroke="var(--ink-700)" strokeWidth="1" strokeDasharray="3 3" />
 
                 {/* Aperture Status Blades */}
                 {status === 'success' || status === 'allowed' ? (
                   // Open Green Aperture
                   <g className="transition-all duration-700 ease-out">
-                    <circle cx="90" cy="90" r="50" fill="rgba(34, 195, 141, 0.15)" stroke="#22C38D" strokeWidth="2" />
-                    <circle cx="90" cy="90" r="30" fill="rgba(34, 195, 141, 0.3)" stroke="#22C38D" strokeWidth="2" />
-                    <path d="M75 90L85 100L105 80" stroke="#22C38D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="90" cy="90" r="50" fill="rgba(34, 195, 141, 0.15)" stroke="var(--clear)" strokeWidth="2" />
+                    <circle cx="90" cy="90" r="30" fill="rgba(34, 195, 141, 0.3)" stroke="var(--clear)" strokeWidth="2" />
+                    <path d="M75 90L85 100L105 80" stroke="var(--clear)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                   </g>
                 ) : status === 'stepup' ? (
                   // Closed Amber Teeth
                   <g className="transition-all duration-500 ease-out">
-                    <polygon points="90,40 105,75 140,90 105,105 90,140 75,105 40,90 75,75" fill="rgba(242, 153, 74, 0.15)" stroke="#F2994A" strokeWidth="2" />
-                    <circle cx="90" cy="90" r="20" stroke="#F2994A" strokeWidth="2" strokeDasharray="4 2" />
-                    <text x="90" y="95" fill="#F2994A" fontSize="14" fontWeight="bold" textAnchor="middle" fontFamily="monospace">!</text>
+                    <polygon points="90,40 105,75 140,90 105,105 90,140 75,105 40,90 75,75" fill="rgba(242, 153, 74, 0.15)" stroke="var(--gate)" strokeWidth="2" />
+                    <circle cx="90" cy="90" r="20" stroke="var(--gate)" strokeWidth="2" strokeDasharray="4 2" />
+                    <text x="90" y="95" fill="var(--gate)" fontSize="14" fontWeight="bold" textAnchor="middle" fontFamily="monospace">!</text>
                   </g>
                 ) : (
                   // Idle Thin Lines
                   <g>
-                    <polygon points="90,45 100,75 130,90 100,105 90,135 80,105 50,90 80,75" stroke="#93A99C" strokeWidth="1.5" />
-                    <circle cx="90" cy="90" r="16" stroke="#223229" strokeWidth="1.5" />
-                    <circle cx="90" cy="90" r="4" fill="#22C38D" className="animate-pulse" />
+                    <polygon points="90,45 100,75 130,90 100,105 90,135 80,105 50,90 80,75" stroke="var(--mist-400)" strokeWidth="1.5" />
+                    <circle cx="90" cy="90" r="16" stroke="var(--ink-700)" strokeWidth="1.5" />
+                    <circle cx="90" cy="90" r="4" fill="var(--clear)" className="animate-pulse" />
                   </g>
                 )}
               </svg>

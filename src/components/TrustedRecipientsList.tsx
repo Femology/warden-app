@@ -101,7 +101,7 @@ export function TrustedRecipientsList({
                   <span className="text-xs" style={{ color: trusted ? 'var(--color-clear)' : 'var(--color-gate)' }}>
                     {trusted
                       ? `Last paid ${new Date(Number(lastPaidAt) * 1000).toLocaleDateString()}`
-                      : 'Trust decayed — next transfer will need confirmation'}
+                      : 'Trust decayed: next transfer will need confirmation'}
                   </span>
                 </div>
                 <button

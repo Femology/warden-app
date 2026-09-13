@@ -113,30 +113,30 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-8 text-[#EAF2ED]">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-8 text-mist-100">
       {/* 4-Pillar Configuration Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* =====================================================================
             PILLAR I: SINGLE-TRANSACTION THRESHOLD
         ===================================================================== */}
-        <div className="flex flex-col justify-between rounded-xl border border-[#223229] bg-[#16251E] p-6 shadow-xl transition-all hover:border-[#22C38D]/40">
+        <div className="flex flex-col justify-between rounded-xl border border-ink-700 bg-ink-800 p-6 shadow-xl transition-all hover:border-clear/40">
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#22C38D]">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-clear">
                 PILLAR I • SINGLE PAYMENT
               </span>
-              <span className="font-mono text-[11px] text-[#93A99C]">Autonomous Limit</span>
+              <span className="font-mono text-[11px] text-mist-400">Autonomous Limit</span>
             </div>
 
-            <label htmlFor="maxNoStepUp" className="font-display text-lg font-bold text-[#EAF2ED]">
+            <label htmlFor="maxNoStepUp" className="font-display text-lg font-bold text-mist-100">
               Amount before step-up
             </label>
-            <p className="text-xs text-[#93A99C] leading-relaxed">
+            <p className="text-xs text-mist-400 leading-relaxed">
               Transfers under this amount to trusted recipients glide through with zero biometric challenges.
             </p>
 
             <div className="relative mt-2">
-              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-mono text-base font-bold text-[#93A99C]">
+              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-mono text-base font-bold text-mist-400">
                 $
               </span>
               <input
@@ -148,7 +148,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   setMaxNoStepUp(e.target.value);
                   sounds.playRatchetTick();
                 }}
-                className="tabular-amount w-full rounded-lg border border-[#223229] bg-[#0D1712] pl-8 pr-4 py-2.5 font-mono text-base font-semibold text-[#EAF2ED] outline-none focus:border-[#22C38D] transition-colors"
+                className="tabular-amount w-full rounded-lg border border-ink-700 bg-ink-900 pl-8 pr-4 py-2.5 font-mono text-base font-semibold text-mist-100 outline-none focus:border-clear transition-colors"
                 placeholder="150"
               />
             </div>
@@ -165,8 +165,8 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   }}
                   className={`rounded-full px-3 py-1 font-mono text-xs transition-colors ${
                     maxNoStepUp === preset
-                      ? 'bg-[#22C38D] text-[#0D1712] font-bold'
-                      : 'border border-[#223229] bg-[#0D1712] text-[#93A99C] hover:border-[#93A99C] hover:text-[#EAF2ED]'
+                      ? 'bg-clear text-ink-900 font-bold'
+                      : 'border border-ink-700 bg-ink-900 text-mist-400 hover:border-mist-400 hover:text-mist-100'
                   }`}
                 >
                   ${preset}
@@ -180,8 +180,8 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                 }}
                 className={`rounded-full px-3 py-1 font-mono text-xs transition-colors ${
                   !['50', '150', '500'].includes(maxNoStepUp)
-                    ? 'border border-[#22C38D] text-[#22C38D]'
-                    : 'border border-[#223229] bg-[#0D1712] text-[#93A99C]'
+                    ? 'border border-clear text-clear'
+                    : 'border border-ink-700 bg-ink-900 text-mist-400'
                 }`}
               >
                 Custom
@@ -194,27 +194,27 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
             PILLAR II: HOURLY VELOCITY CEILING
         ===================================================================== */}
         <div
-          className={`flex flex-col justify-between rounded-xl border bg-[#16251E] p-6 shadow-xl transition-all ${
-            hourlyAboveDaily ? 'border-[#FF5A52]' : 'border-[#223229] hover:border-[#22C38D]/40'
+          className={`flex flex-col justify-between rounded-xl border bg-ink-800 p-6 shadow-xl transition-all ${
+            hourlyAboveDaily ? 'border-fault' : 'border-ink-700 hover:border-clear/40'
           }`}
         >
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#F2994A]">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-gate">
                 PILLAR II • ROLLING WINDOW
               </span>
-              <span className="font-mono text-[11px] text-[#93A99C]">60-Minute Burst</span>
+              <span className="font-mono text-[11px] text-mist-400">60-Minute Burst</span>
             </div>
 
-            <label htmlFor="hourlyVelocityCap" className="font-display text-lg font-bold text-[#EAF2ED]">
+            <label htmlFor="hourlyVelocityCap" className="font-display text-lg font-bold text-mist-100">
               Hourly limit
             </label>
-            <p className="text-xs text-[#93A99C] leading-relaxed">
+            <p className="text-xs text-mist-400 leading-relaxed">
               Maximum cumulative outflow allowed within any 60-minute window to halt automated account draining.
             </p>
 
             <div className="relative mt-2">
-              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-mono text-base font-bold text-[#93A99C]">
+              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-mono text-base font-bold text-mist-400">
                 $
               </span>
               <input
@@ -227,10 +227,10 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   sounds.playRatchetTick();
                 }}
                 aria-invalid={hourlyAboveDaily}
-                className={`tabular-amount w-full rounded-lg border bg-[#0D1712] pl-8 pr-4 py-2.5 font-mono text-base font-semibold text-[#EAF2ED] outline-none transition-colors ${
+                className={`tabular-amount w-full rounded-lg border bg-ink-900 pl-8 pr-4 py-2.5 font-mono text-base font-semibold text-mist-100 outline-none transition-colors ${
                   hourlyAboveDaily
-                    ? 'border-[#FF5A52] focus:border-[#FF5A52]'
-                    : 'border-[#223229] focus:border-[#22C38D]'
+                    ? 'border-fault focus:border-fault'
+                    : 'border-ink-700 focus:border-clear'
                 }`}
                 placeholder="200"
               />
@@ -238,7 +238,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
 
             {/* Invariant Error Message */}
             {hourlyAboveDaily && (
-              <p role="alert" className="mt-1 font-mono text-xs font-semibold text-[#FF5A52]">
+              <p role="alert" className="mt-1 font-mono text-xs font-semibold text-fault">
                 Your hourly limit can&apos;t be more than your daily limit. Hourly speed limit cannot exceed 24-hour daily volume ceiling.
               </p>
             )}
@@ -255,8 +255,8 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   }}
                   className={`rounded-full px-3 py-1 font-mono text-xs transition-colors ${
                     hourlyVelocityCap === preset
-                      ? 'bg-[#F2994A] text-[#0D1712] font-bold'
-                      : 'border border-[#223229] bg-[#0D1712] text-[#93A99C] hover:border-[#93A99C] hover:text-[#EAF2ED]'
+                      ? 'bg-gate text-ink-900 font-bold'
+                      : 'border border-ink-700 bg-ink-900 text-mist-400 hover:border-mist-400 hover:text-mist-100'
                   }`}
                 >
                   ${preset}
@@ -270,27 +270,27 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
             PILLAR III: 24-HOUR GLOBAL VOLUME CEILING
         ===================================================================== */}
         <div
-          className={`flex flex-col justify-between rounded-xl border bg-[#16251E] p-6 shadow-xl transition-all ${
-            capBelowMax ? 'border-[#FF5A52]' : 'border-[#223229] hover:border-[#22C38D]/40'
+          className={`flex flex-col justify-between rounded-xl border bg-ink-800 p-6 shadow-xl transition-all ${
+            capBelowMax ? 'border-fault' : 'border-ink-700 hover:border-clear/40'
           }`}
         >
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#22C38D]">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-clear">
                 PILLAR III • GLOBAL CEILING
               </span>
-              <span className="font-mono text-[11px] text-[#93A99C]">24-Hour Horizon</span>
+              <span className="font-mono text-[11px] text-mist-400">24-Hour Horizon</span>
             </div>
 
-            <label htmlFor="dailyVelocityCap" className="font-display text-lg font-bold text-[#EAF2ED]">
+            <label htmlFor="dailyVelocityCap" className="font-display text-lg font-bold text-mist-100">
               Daily limit
             </label>
-            <p className="text-xs text-[#93A99C] leading-relaxed">
+            <p className="text-xs text-mist-400 leading-relaxed">
               Absolute maximum capital that can leave this account within a rolling 24-hour day across all transactions.
             </p>
 
             <div className="relative mt-2">
-              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-mono text-base font-bold text-[#93A99C]">
+              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 font-mono text-base font-bold text-mist-400">
                 $
               </span>
               <input
@@ -303,10 +303,10 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   sounds.playRatchetTick();
                 }}
                 aria-invalid={capBelowMax}
-                className={`tabular-amount w-full rounded-lg border bg-[#0D1712] pl-8 pr-4 py-2.5 font-mono text-base font-semibold text-[#EAF2ED] outline-none transition-colors ${
+                className={`tabular-amount w-full rounded-lg border bg-ink-900 pl-8 pr-4 py-2.5 font-mono text-base font-semibold text-mist-100 outline-none transition-colors ${
                   capBelowMax
-                    ? 'border-[#FF5A52] focus:border-[#FF5A52]'
-                    : 'border-[#223229] focus:border-[#22C38D]'
+                    ? 'border-fault focus:border-fault'
+                    : 'border-ink-700 focus:border-clear'
                 }`}
                 placeholder="500"
               />
@@ -314,7 +314,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
 
             {/* Invariant Error Message */}
             {capBelowMax && (
-              <p role="alert" className="mt-1 font-mono text-xs font-semibold text-[#FF5A52]">
+              <p role="alert" className="mt-1 font-mono text-xs font-semibold text-fault">
                 Your daily limit can&apos;t be less than your no-confirmation amount.
               </p>
             )}
@@ -331,8 +331,8 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   }}
                   className={`rounded-full px-3 py-1 font-mono text-xs transition-colors ${
                     dailyVelocityCap === preset
-                      ? 'bg-[#22C38D] text-[#0D1712] font-bold'
-                      : 'border border-[#223229] bg-[#0D1712] text-[#93A99C] hover:border-[#93A99C] hover:text-[#EAF2ED]'
+                      ? 'bg-clear text-ink-900 font-bold'
+                      : 'border border-ink-700 bg-ink-900 text-mist-400 hover:border-mist-400 hover:text-mist-100'
                   }`}
                 >
                   ${preset}
@@ -345,19 +345,19 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
         {/* =====================================================================
             PILLAR IV: TEMPORAL TRUST DECAY
         ===================================================================== */}
-        <div className="flex flex-col justify-between rounded-xl border border-[#223229] bg-[#16251E] p-6 shadow-xl transition-all hover:border-[#22C38D]/40">
+        <div className="flex flex-col justify-between rounded-xl border border-ink-700 bg-ink-800 p-6 shadow-xl transition-all hover:border-clear/40">
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#F2994A]">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-gate">
                 PILLAR IV • MEMORY HORIZON
               </span>
-              <span className="font-mono text-[11px] text-[#93A99C]">Trust Decay</span>
+              <span className="font-mono text-[11px] text-mist-400">Trust Decay</span>
             </div>
 
-            <label htmlFor="trustDecayDays" className="font-display text-lg font-bold text-[#EAF2ED]">
+            <label htmlFor="trustDecayDays" className="font-display text-lg font-bold text-mist-100">
               Trust expires after
             </label>
-            <p className="text-xs text-[#93A99C] leading-relaxed">
+            <p className="text-xs text-mist-400 leading-relaxed">
               If you haven&apos;t sent funds to a recipient in this window, their trust expires and re-verification is required.
             </p>
 
@@ -373,12 +373,12 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   }}
                   className={`flex flex-col items-start rounded-lg border p-2.5 text-left transition-all ${
                     trustDecayDays === opt.days
-                      ? 'border-[#22C38D] bg-[#22C38D]/15 text-[#EAF2ED]'
-                      : 'border-[#223229] bg-[#0D1712] text-[#93A99C] hover:border-[#93A99C]'
+                      ? 'border-clear bg-clear/15 text-mist-100'
+                      : 'border-ink-700 bg-ink-900 text-mist-400 hover:border-mist-400'
                   }`}
                 >
-                  <span className="font-mono text-xs font-bold text-[#EAF2ED]">{opt.label}</span>
-                  <span className="text-[10px] font-mono text-[#93A99C]">{Number(opt.days) * 86400} seconds</span>
+                  <span className="font-mono text-xs font-bold text-mist-100">{opt.label}</span>
+                  <span className="text-[10px] font-mono text-mist-400">{Number(opt.days) * 86400} seconds</span>
                 </button>
               ))}
             </div>
@@ -395,9 +395,9 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
                   setTrustDecayDays(e.target.value);
                   sounds.playRatchetTick();
                 }}
-                className="tabular-amount w-28 rounded-md border border-[#223229] bg-[#0D1712] px-3 py-1.5 font-mono text-xs text-[#EAF2ED] outline-none focus:border-[#22C38D]"
+                className="tabular-amount w-28 rounded-md border border-ink-700 bg-ink-900 px-3 py-1.5 font-mono text-xs text-mist-100 outline-none focus:border-clear"
               />
-              <span className="font-mono text-xs text-[#93A99C]">days without a payment</span>
+              <span className="font-mono text-xs text-mist-400">days without a payment</span>
             </div>
           </div>
         </div>
@@ -406,7 +406,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
       {/* =========================================================================
           SECURITY SWITCH: NEW RECIPIENT SHIELD
       ========================================================================= */}
-      <div className="rounded-xl border border-[#223229] bg-[#16251E] p-6 shadow-xl">
+      <div className="rounded-xl border border-ink-700 bg-ink-800 p-6 shadow-xl">
         <label className="flex items-start gap-4 cursor-pointer">
           <div className="relative mt-0.5 flex items-center">
             <input
@@ -420,21 +420,21 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
             />
             <div
               className={`h-6 w-11 rounded-full transition-colors ${
-                newRecipientRequiresStepUp ? 'bg-[#22C38D]' : 'bg-[#223229]'
+                newRecipientRequiresStepUp ? 'bg-clear' : 'bg-ink-700'
               }`}
             >
               <div
-                className={`h-5 w-5 rounded-full bg-[#0D1712] transition-transform duration-200 ease-out mt-0.5 ml-0.5 ${
+                className={`h-5 w-5 rounded-full bg-ink-900 transition-transform duration-200 ease-out mt-0.5 ml-0.5 ${
                   newRecipientRequiresStepUp ? 'translate-x-5' : 'translate-x-0'
                 }`}
               />
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="font-display text-base font-bold text-[#EAF2ED]">
+            <span className="font-display text-base font-bold text-mist-100">
               Ask for confirmation the first time I send to a new recipient
             </span>
-            <span className="text-xs text-[#93A99C] leading-relaxed">
+            <span className="text-xs text-mist-400 leading-relaxed">
               Require Step-Up for First-Time Recipients: When enabled, any transfer to an address you have never paid before requires secondary confirmation, regardless of how small the amount is.
             </span>
           </div>
@@ -446,67 +446,67 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
       ========================================================================= */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Illustration 1: The Multi-Tier Safety Envelope */}
-        <div className="flex flex-col gap-3 rounded-xl border border-[#223229] bg-[#16251E] p-6 shadow-xl">
-          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#93A99C]">
+        <div className="flex flex-col gap-3 rounded-xl border border-ink-700 bg-ink-800 p-6 shadow-xl">
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-mist-400">
             ILLUSTRATION // THE MULTI-TIER SAFETY ENVELOPE
           </span>
-          <div className="flex h-44 w-full items-center justify-center rounded-lg border border-[#223229] bg-[#0D1712] p-4">
+          <div className="flex h-44 w-full items-center justify-center rounded-lg border border-ink-700 bg-ink-900 p-4">
             <svg viewBox="0 0 320 140" fill="none" className="w-full max-w-[300px] h-auto">
               {/* Daily Outer Boundary */}
-              <rect x="10" y="10" width="300" height="120" rx="12" stroke="#223229" strokeWidth="2" strokeDasharray="4 4" />
-              <text x="20" y="28" fill="#93A99C" fontSize="10" fontFamily="monospace">
+              <rect x="10" y="10" width="300" height="120" rx="12" stroke="var(--ink-700)" strokeWidth="2" strokeDasharray="4 4" />
+              <text x="20" y="28" fill="var(--mist-400)" fontSize="10" fontFamily="monospace">
                 DAILY CEILING: ${dailyVelocityCap}
               </text>
 
               {/* Hourly Velocity Ring */}
-              <rect x="40" y="36" width="240" height="84" rx="8" stroke="#F2994A" strokeWidth="1.5" />
-              <text x="50" y="52" fill="#F2994A" fontSize="9" fontFamily="monospace">
+              <rect x="40" y="36" width="240" height="84" rx="8" stroke="var(--gate)" strokeWidth="1.5" />
+              <text x="50" y="52" fill="var(--gate)" fontSize="9" fontFamily="monospace">
                 HOURLY SPEED LIMIT: ${hourlyVelocityCap}
               </text>
 
               {/* Single-Tx Core */}
-              <rect x="75" y="64" width="170" height="46" rx="6" fill="rgba(34,195,141,0.08)" stroke="#22C38D" strokeWidth="1.5" />
-              <text x="85" y="90" fill="#22C38D" fontSize="11" fontWeight="bold" fontFamily="monospace">
+              <rect x="75" y="64" width="170" height="46" rx="6" fill="rgba(34,195,141,0.08)" stroke="var(--clear)" strokeWidth="1.5" />
+              <text x="85" y="90" fill="var(--clear)" fontSize="11" fontWeight="bold" fontFamily="monospace">
                 SINGLE-TX CAP: ${maxNoStepUp}
               </text>
             </svg>
           </div>
-          <p className="text-[11px] font-mono text-[#93A99C]">
+          <p className="text-[11px] font-mono text-mist-400">
             Enclosed boundaries: Single-Tx Cap ⊂ Hourly Velocity ⊂ Daily Global Cap.
           </p>
         </div>
 
         {/* Illustration 2: Trust Decay Timeline */}
-        <div className="flex flex-col gap-3 rounded-xl border border-[#223229] bg-[#16251E] p-6 shadow-xl">
-          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#93A99C]">
+        <div className="flex flex-col gap-3 rounded-xl border border-ink-700 bg-ink-800 p-6 shadow-xl">
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-mist-400">
             ILLUSTRATION // TRUST DECAY TIMELINE
           </span>
-          <div className="flex h-44 w-full items-center justify-center rounded-lg border border-[#223229] bg-[#0D1712] p-4">
+          <div className="flex h-44 w-full items-center justify-center rounded-lg border border-ink-700 bg-ink-900 p-4">
             <svg viewBox="0 0 320 140" fill="none" className="w-full max-w-[300px] h-auto">
               {/* Solid Green Active Lifeline */}
-              <line x1="30" y1="70" x2="190" y2="70" stroke="#22C38D" strokeWidth="3" />
+              <line x1="30" y1="70" x2="190" y2="70" stroke="var(--clear)" strokeWidth="3" />
               {/* Amber Dashed Decaying Lifeline */}
-              <line x1="190" y1="70" x2="290" y2="70" stroke="#F2994A" strokeWidth="2" strokeDasharray="4 4" />
+              <line x1="190" y1="70" x2="290" y2="70" stroke="var(--gate)" strokeWidth="2" strokeDasharray="4 4" />
 
               {/* Node 1: Day 0 Verified */}
-              <circle cx="30" cy="70" r="8" fill="#0D1712" stroke="#22C38D" strokeWidth="2" />
-              <circle cx="30" cy="70" r="3" fill="#22C38D" />
-              <text x="15" y="98" fill="#93A99C" fontSize="9" fontFamily="monospace">Day 0</text>
-              <text x="10" y="112" fill="#22C38D" fontSize="8" fontFamily="monospace">Active</text>
+              <circle cx="30" cy="70" r="8" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="2" />
+              <circle cx="30" cy="70" r="3" fill="var(--clear)" />
+              <text x="15" y="98" fill="var(--mist-400)" fontSize="9" fontFamily="monospace">Day 0</text>
+              <text x="10" y="112" fill="var(--clear)" fontSize="8" fontFamily="monospace">Active</text>
 
               {/* Node 2: Current Progress (Day 24) */}
-              <circle cx="190" cy="70" r="7" fill="#0D1712" stroke="#F2994A" strokeWidth="2" />
-              <circle cx="190" cy="70" r="2.5" fill="#F2994A" />
-              <text x="175" y="98" fill="#93A99C" fontSize="9" fontFamily="monospace">Day 24</text>
-              <text x="165" y="112" fill="#F2994A" fontSize="8" fontFamily="monospace">Decaying</text>
+              <circle cx="190" cy="70" r="7" fill="var(--ink-900)" stroke="var(--gate)" strokeWidth="2" />
+              <circle cx="190" cy="70" r="2.5" fill="var(--gate)" />
+              <text x="175" y="98" fill="var(--mist-400)" fontSize="9" fontFamily="monospace">Day 24</text>
+              <text x="165" y="112" fill="var(--gate)" fontSize="8" fontFamily="monospace">Decaying</text>
 
               {/* Node 3: Decay Expiry Threshold */}
-              <circle cx="290" cy="70" r="6" fill="#0D1712" stroke="#FF5A52" strokeWidth="1.5" />
-              <text x="270" y="98" fill="#93A99C" fontSize="9" fontFamily="monospace">Day {trustDecayDays}</text>
-              <text x="260" y="112" fill="#FF5A52" fontSize="8" fontFamily="monospace">Expired</text>
+              <circle cx="290" cy="70" r="6" fill="var(--ink-900)" stroke="var(--fault)" strokeWidth="1.5" />
+              <text x="270" y="98" fill="var(--mist-400)" fontSize="9" fontFamily="monospace">Day {trustDecayDays}</text>
+              <text x="260" y="112" fill="var(--fault)" fontSize="8" fontFamily="monospace">Expired</text>
             </svg>
           </div>
-          <p className="text-[11px] font-mono text-[#93A99C]">
+          <p className="text-[11px] font-mono text-mist-400">
             Verified counterparties fade to unverified status after {trustDecayDays} days without interaction.
           </p>
         </div>
@@ -515,50 +515,50 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
       {/* =========================================================================
           RULEBOOK IMPACT PREVIEW SIMULATOR CARD
       ========================================================================= */}
-      <div className="rounded-xl border border-[#223229] bg-[#16251E] p-6 sm:p-8 shadow-xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#223229] pb-4 gap-2">
+      <div className="rounded-xl border border-ink-700 bg-ink-800 p-6 sm:p-8 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-ink-700 pb-4 gap-2">
           <div>
-            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#22C38D]">
+            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-clear">
               REAL-TIME SIMULATION
             </span>
-            <h3 className="font-display text-xl font-bold text-[#EAF2ED]">
+            <h3 className="font-display text-xl font-bold text-mist-100">
               Rulebook Impact Preview
             </h3>
           </div>
-          <span className="font-mono text-xs text-[#93A99C]">
+          <span className="font-mono text-xs text-mist-400">
             Dynamic Evaluation against Current Form Limits
           </span>
         </div>
 
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Test Case A: Morning Coffee */}
-          <div className="flex flex-col justify-between rounded-xl border border-[#223229] bg-[#0D1712] p-4">
+          <div className="flex flex-col justify-between rounded-xl border border-ink-700 bg-ink-900 p-4">
             <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] text-[#93A99C]">TEST CASE A</span>
-              <span className="font-display text-sm font-bold text-[#EAF2ED]">Morning Coffee</span>
-              <span className="font-mono text-xs text-[#93A99C]">$8.50 to Trusted Friend</span>
+              <span className="font-mono text-[10px] text-mist-400">TEST CASE A</span>
+              <span className="font-display text-sm font-bold text-mist-100">Morning Coffee</span>
+              <span className="font-mono text-xs text-mist-400">$8.50 to Trusted Friend</span>
             </div>
             <div className="mt-4">
-              <span className="inline-flex rounded-full bg-[#22C38D]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[#22C38D]">
+              <span className="inline-flex rounded-full bg-clear/15 px-2.5 py-1 font-mono text-[10px] font-bold text-clear">
                 ALLOW INSTANTLY
               </span>
             </div>
           </div>
 
           {/* Test Case B: Large Purchase */}
-          <div className="flex flex-col justify-between rounded-xl border border-[#223229] bg-[#0D1712] p-4">
+          <div className="flex flex-col justify-between rounded-xl border border-ink-700 bg-ink-900 p-4">
             <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] text-[#93A99C]">TEST CASE B</span>
-              <span className="font-display text-sm font-bold text-[#EAF2ED]">Large Purchase</span>
-              <span className="font-mono text-xs text-[#93A99C]">$300.00 Outflow</span>
+              <span className="font-mono text-[10px] text-mist-400">TEST CASE B</span>
+              <span className="font-display text-sm font-bold text-mist-100">Large Purchase</span>
+              <span className="font-mono text-xs text-mist-400">$300.00 Outflow</span>
             </div>
             <div className="mt-4">
               {300 > numMax ? (
-                <span className="inline-flex rounded-full bg-[#F2994A]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[#F2994A]">
+                <span className="inline-flex rounded-full bg-gate/15 px-2.5 py-1 font-mono text-[10px] font-bold text-gate">
                   STEP-UP (AmountExceeded)
                 </span>
               ) : (
-                <span className="inline-flex rounded-full bg-[#22C38D]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[#22C38D]">
+                <span className="inline-flex rounded-full bg-clear/15 px-2.5 py-1 font-mono text-[10px] font-bold text-clear">
                   ALLOW INSTANTLY
                 </span>
               )}
@@ -566,33 +566,33 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
           </div>
 
           {/* Test Case C: Automated Burst */}
-          <div className="flex flex-col justify-between rounded-xl border border-[#223229] bg-[#0D1712] p-4">
+          <div className="flex flex-col justify-between rounded-xl border border-ink-700 bg-ink-900 p-4">
             <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] text-[#93A99C]">TEST CASE C</span>
-              <span className="font-display text-sm font-bold text-[#EAF2ED]">3:00 AM Drain Burst</span>
-              <span className="font-mono text-xs text-[#93A99C]">4 × $100 in 10 minutes</span>
+              <span className="font-mono text-[10px] text-mist-400">TEST CASE C</span>
+              <span className="font-display text-sm font-bold text-mist-100">3:00 AM Drain Burst</span>
+              <span className="font-mono text-xs text-mist-400">4 × $100 in 10 minutes</span>
             </div>
             <div className="mt-4">
-              <span className="inline-flex rounded-full bg-[#F2994A]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[#F2994A]">
+              <span className="inline-flex rounded-full bg-gate/15 px-2.5 py-1 font-mono text-[10px] font-bold text-gate">
                 HOURLY SPEED LIMIT REACHED
               </span>
             </div>
           </div>
 
           {/* Test Case D: Inactive Friend */}
-          <div className="flex flex-col justify-between rounded-xl border border-[#223229] bg-[#0D1712] p-4">
+          <div className="flex flex-col justify-between rounded-xl border border-ink-700 bg-ink-900 p-4">
             <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] text-[#93A99C]">TEST CASE D</span>
-              <span className="font-display text-sm font-bold text-[#EAF2ED]">Inactive Peer (35 Days)</span>
-              <span className="font-mono text-xs text-[#93A99C]">$40.00 to Dormant Peer</span>
+              <span className="font-mono text-[10px] text-mist-400">TEST CASE D</span>
+              <span className="font-display text-sm font-bold text-mist-100">Inactive Peer (35 Days)</span>
+              <span className="font-mono text-xs text-mist-400">$40.00 to Dormant Peer</span>
             </div>
             <div className="mt-4">
               {Number(trustDecayDays) < 35 ? (
-                <span className="inline-flex rounded-full bg-[#F2994A]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[#F2994A]">
+                <span className="inline-flex rounded-full bg-gate/15 px-2.5 py-1 font-mono text-[10px] font-bold text-gate">
                   STEP-UP (TrustDecayed)
                 </span>
               ) : (
-                <span className="inline-flex rounded-full bg-[#22C38D]/15 px-2.5 py-1 font-mono text-[10px] font-bold text-[#22C38D]">
+                <span className="inline-flex rounded-full bg-clear/15 px-2.5 py-1 font-mono text-[10px] font-bold text-clear">
                   ALLOW INSTANTLY
                 </span>
               )}
@@ -604,11 +604,11 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
       {/* =========================================================================
           SUBMISSION DECK & TRANSACTION METRICS STRIP
       ========================================================================= */}
-      <div className="rounded-xl border border-[#223229] bg-[#16251E] p-6 shadow-xl flex flex-col gap-6">
+      <div className="rounded-xl border border-ink-700 bg-ink-800 p-6 shadow-xl flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <div className="flex flex-col gap-1">
-            <span className="font-display text-lg font-bold text-[#EAF2ED]">Commit Boundaries to Stellar</span>
-            <span className="text-xs text-[#93A99C]">
+            <span className="font-display text-lg font-bold text-mist-100">Commit Boundaries to Stellar</span>
+            <span className="text-xs text-mist-400">
               Updates will be signed with your active Freighter keys and recorded in contract storage.
             </span>
           </div>
@@ -618,7 +618,7 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
             type="submit"
             aria-label="Set limits"
             disabled={isInvalid || status === 'submitting' || status === 'building' || status === 'signing'}
-            className="flex items-center justify-center gap-2 rounded-xl bg-[#22C38D] px-8 py-3.5 font-mono text-sm font-bold text-[#0D1712] shadow-lg shadow-[#22C38D]/20 transition-all hover:bg-[#22C38D]/90 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center justify-center gap-2 rounded-xl bg-clear px-8 py-3.5 font-mono text-sm font-bold text-ink-900 shadow-lg shadow-clear/20 transition-all hover:bg-clear/90 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           >
             <span>Sign &amp; Commit Policy to Stellar</span>
             <span className="sr-only">Set limits</span>
@@ -627,36 +627,36 @@ export function PolicyForm({ wallet, onSaved }: PolicyFormProps) {
 
         {/* Real-time Submission States */}
         {status === 'building' && (
-          <div className="flex items-center gap-2 font-mono text-xs text-[#F2994A]">
-            <span className="h-2 w-2 rounded-full bg-[#F2994A] animate-ping" />
+          <div className="flex items-center gap-2 font-mono text-xs text-gate">
+            <span className="h-2 w-2 rounded-full bg-gate animate-ping" />
             <span>Building XDR transaction envelope…</span>
           </div>
         )}
         {status === 'signing' && (
-          <div className="flex items-center gap-2 font-mono text-xs text-[#F2994A]">
-            <span className="h-2 w-2 rounded-full bg-[#F2994A] animate-ping" />
+          <div className="flex items-center gap-2 font-mono text-xs text-gate">
+            <span className="h-2 w-2 rounded-full bg-gate animate-ping" />
             <span>Awaiting wallet authorization signature via Freighter…</span>
           </div>
         )}
         {status === 'submitting' && (
-          <div className="flex items-center gap-2 font-mono text-xs text-[#22C38D]">
-            <span className="h-2 w-2 rounded-full bg-[#22C38D] animate-ping" />
+          <div className="flex items-center gap-2 font-mono text-xs text-clear">
+            <span className="h-2 w-2 rounded-full bg-clear animate-ping" />
             <span>Submitting to Stellar Testnet Soroban RPC…</span>
           </div>
         )}
         {status === 'success' && (
-          <p role="status" className="font-mono text-xs font-semibold text-[#22C38D]">
+          <p role="status" className="font-mono text-xs font-semibold text-clear">
             Limits set. Policy Committed On-Chain.
           </p>
         )}
         {status === 'error' && error && (
-          <p role="alert" className="font-mono text-xs font-semibold text-[#FF5A52]">
+          <p role="alert" className="font-mono text-xs font-semibold text-fault">
             {error}
           </p>
         )}
 
         {/* Monospace Telemetry Strip */}
-        <div className="border-t border-[#223229] pt-4 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-[#93A99C]">
+        <div className="border-t border-ink-700 pt-4 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-mist-400">
           <span>NETWORK: STELLAR TESTNET</span>
           <span>ESTIMATED FEE: &lt; 0.00001 XLM</span>
           <span>AUTHORIZATION: WALLET REQUIRED</span>

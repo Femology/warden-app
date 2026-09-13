@@ -117,7 +117,7 @@ export function TrustDecayTimeMachine() {
                   : 'border border-clear/40 bg-clear/15 text-clear'
               }`}
             >
-              {isDecayed ? '⚠️ Trust Decayed (>30d) — Step-Up Required' : '✓ Active Relationship (Instant Allowed)'}
+              {isDecayed ? '⚠️ Trust Decayed (>30d): Step-Up Required' : '✓ Active Relationship (Instant Allowed)'}
             </div>
           </div>
 
@@ -129,7 +129,7 @@ export function TrustDecayTimeMachine() {
               max={90}
               value={trustDays}
               onChange={(e) => handleDaysChange(Number(e.target.value))}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-gate outline-none"
+              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-gate outline-none focus-visible:ring-2 focus-visible:ring-gate/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
             />
             <div className="flex justify-between text-[11px] text-mist-400">
               <span>Day 0 (Paid today)</span>

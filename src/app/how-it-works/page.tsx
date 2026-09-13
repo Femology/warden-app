@@ -33,7 +33,7 @@ const STORIES: Record<ExampleStory, StoryData> = {
     recipient: 'Downtown Cafe (Saved Merchant)',
     reason: 'Under your $500 limit • Regular morning spot • Zero prior spend today',
     result: 'allow',
-    resultTitle: 'Allowed Instantly — No Face Scan Needed',
+    resultTitle: 'Allowed Instantly - No Face Scan Needed',
     explanation:
       'Because the amount is small and you pay this cafe every week, Warden lets it through right away. You get your coffee without standing in line scanning your face.',
     stepChecks: {
@@ -52,7 +52,7 @@ const STORIES: Record<ExampleStory, StoryData> = {
     recipient: 'Sarah (Sister)',
     reason: 'Under your $500 limit • On your trusted friend list • Normal spending pace',
     result: 'allow',
-    resultTitle: 'Allowed Instantly — Sent in 5 Seconds',
+    resultTitle: 'Allowed Instantly - Sent in 5 Seconds',
     explanation:
       'Sarah is on your saved list of friends. Since the transfer is well within your safety budget, the money sends immediately with one normal tap.',
     stepChecks: {
@@ -128,7 +128,7 @@ export default function HowItWorksPage() {
     <div className="relative min-h-screen">
       {/* SEO Metadata schema */}
       <head>
-        <title>How Warden Works — Simple On-Chain Smart Wallet Security</title>
+        <title>How Warden Works - Simple On-Chain Smart Wallet Security</title>
         <meta
           name="description"
           content="Learn how Warden protects your digital money with smart spending rules. Zero friction on daily coffee runs, instant lock-down when unusual drains occur."

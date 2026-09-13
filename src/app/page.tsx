@@ -119,8 +119,8 @@ export default function Home() {
         status: 'blocked',
         reason: 'FlaggedRecipient' as StepUpReason,
         badge: 'REQUIRE STEP-UP',
-        badgeColor: '#FF5A52',
-        badgeBg: 'rgba(255, 90, 82, 0.15)',
+        badgeColor: 'var(--fault)',
+        badgeBg: 'color-mix(in srgb, var(--fault) 15%, transparent)',
         headline: 'Flagged / Malicious Address Detected',
         summary: 'Destination is permanently cataloged on the on-chain malicious registry. Instant transfer refused regardless of amount or balance.',
         isFlagged: true,
@@ -133,8 +133,8 @@ export default function Home() {
         status: 'stepup',
         reason: 'VelocityExceeded' as StepUpReason,
         badge: 'REQUIRE STEP-UP',
-        badgeColor: '#F2994A',
-        badgeBg: 'rgba(242, 153, 74, 0.15)',
+        badgeColor: 'var(--gate)',
+        badgeBg: 'color-mix(in srgb, var(--gate) 15%, transparent)',
         headline: '24-Hour Velocity Cap Breached',
         summary: `Accumulated $${totalDaily} across 24h exceeds the $${DAILY_CAP} daily ceiling. Multi-signer confirmation required.`,
         isFlagged: false,
@@ -147,8 +147,8 @@ export default function Home() {
         status: 'stepup',
         reason: 'HourlyVelocityExceeded' as StepUpReason,
         badge: 'REQUIRE STEP-UP',
-        badgeColor: '#F2994A',
-        badgeBg: 'rgba(242, 153, 74, 0.15)',
+        badgeColor: 'var(--gate)',
+        badgeBg: 'color-mix(in srgb, var(--gate) 15%, transparent)',
         headline: '1-Hour Rapid Velocity Spike',
         summary: `Burst spend of $${totalHourly}/hr exceeds your $${HOURLY_CAP}/hr safety threshold. Halting rapid-fire testing.`,
         isFlagged: false,
@@ -161,8 +161,8 @@ export default function Home() {
         status: 'stepup',
         reason: 'AmountExceeded' as StepUpReason,
         badge: 'REQUIRE STEP-UP',
-        badgeColor: '#F2994A',
-        badgeBg: 'rgba(242, 153, 74, 0.15)',
+        badgeColor: 'var(--gate)',
+        badgeBg: 'color-mix(in srgb, var(--gate) 15%, transparent)',
         headline: 'Single Transaction Threshold Exceeded',
         summary: `Transfer of $${amount} exceeds the $${POLICY_LIMIT_SINGLE} no-step-up ceiling. Step-up confirms intentionality.`,
         isFlagged: false,
@@ -175,8 +175,8 @@ export default function Home() {
         status: 'stepup',
         reason: 'NewRecipient' as StepUpReason,
         badge: 'REQUIRE STEP-UP',
-        badgeColor: '#F2994A',
-        badgeBg: 'rgba(242, 153, 74, 0.15)',
+        badgeColor: 'var(--gate)',
+        badgeBg: 'color-mix(in srgb, var(--gate) 15%, transparent)',
         headline: 'First-Time Recipient Check',
         summary: "You haven't sent to this address before or trust has decayed. Requires one explicit confirmation.",
         isFlagged: false,
@@ -188,8 +188,8 @@ export default function Home() {
       status: 'allow',
       reason: null,
       badge: 'ALLOW INSTANTLY',
-      badgeColor: '#22C38D',
-      badgeBg: 'rgba(34, 195, 141, 0.15)',
+      badgeColor: 'var(--clear)',
+      badgeBg: 'color-mix(in srgb, var(--clear) 15%, transparent)',
       headline: 'Low-Risk Autonomous Passage',
       summary: 'Under limit ($500), recipient verified in web-of-trust, and velocity headroom verified on-chain. Zero friction.',
       isFlagged: false,
@@ -285,7 +285,7 @@ export default function Home() {
             <a
               href="#sandbox"
               onClick={() => sounds.playClick()}
-              className="rounded-full bg-clear px-8 py-3.5 text-base font-semibold text-ink-900 shadow-md shadow-clear/20 transition-all hover:scale-105 hover:bg-clear/90 focus-visible:outline-none"
+              className="rounded-full bg-clear px-8 py-3.5 text-base font-semibold text-ink-900 shadow-md shadow-clear/20 transition-all hover:scale-105 hover:bg-clear/90"
             >
               Launch Interactive Sandbox ↓
             </a>
@@ -362,7 +362,7 @@ export default function Home() {
             <strong className="text-mist-100 font-semibold">
               Scenario: {PRESET_STORIES.find((s) => s.id === selectedStory)?.title}
             </strong>{' '}
-            — {PRESET_STORIES.find((s) => s.id === selectedStory)?.description}
+            {PRESET_STORIES.find((s) => s.id === selectedStory)?.description}
           </div>
 
           {/* Terminal Bento Card Container */}
@@ -432,7 +432,7 @@ export default function Home() {
                     setSelectedStory('custom');
                     setAmount(Number(e.target.value));
                   }}
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-clear outline-none"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-700 accent-clear outline-none focus-visible:ring-2 focus-visible:ring-clear/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900"
                 />
                 <div className="flex justify-between text-[11px] font-mono text-mist-400">
                   <span>$1 (Micro)</span>
@@ -655,7 +655,7 @@ export default function Home() {
                   </button>
                 ) : (
                   <div className="rounded-xl border border-clear/30 bg-clear/10 py-2.5 text-center font-mono text-xs text-clear font-medium">
-                    ✓ Frictionless path active — no step-up required.
+                    ✓ Frictionless path active, no step-up required.
                   </div>
                 )}
 
@@ -705,7 +705,7 @@ export default function Home() {
               Why Are You Scanning Your Face for a $4.50 Coffee?
             </h2>
             <p className="max-w-2xl text-sm text-mist-400">
-              Traditional fintech apps force identical biometric barriers on routine micro-payments—and then fail completely
+              Traditional fintech apps force identical biometric barriers on routine micro-payments, then fail completely
               when an account takeover attempts a $25,000 drain to a stranger.
             </p>
           </div>
@@ -777,7 +777,7 @@ export default function Home() {
                   <span className="text-clear font-bold">✓</span>
                   <div>
                     <strong className="text-mist-100">Enforced at Protocol Boundary:</strong> Embedded natively inside Soroban’s
-                    account auth check—cannot be bypassed by modified client apps.
+                    account auth check, cannot be bypassed by modified client apps.
                   </div>
                 </li>
               </ul>
@@ -893,35 +893,35 @@ export default function Home() {
               {
                 id: 'NORMAL',
                 tier: 'Tier 1',
-                badgeColor: '#22C38D',
+                badgeColor: 'var(--clear)',
                 title: 'NORMAL',
                 desc: 'Standard friction-free operation for all transfers under policy limits.',
               },
               {
                 id: 'WATCH',
                 tier: 'Tier 2',
-                badgeColor: '#93A99C',
+                badgeColor: 'var(--mist-400)',
                 title: 'WATCH',
                 desc: 'First anomaly observed. Logging frequency increases; guardians can be added.',
               },
               {
                 id: 'RESTRICTED',
                 tier: 'Tier 3',
-                badgeColor: '#F2994A',
+                badgeColor: 'var(--gate)',
                 title: 'RESTRICTED',
                 desc: 'Limits cut by 50%. Large transfers disabled to prevent skimming.',
               },
               {
                 id: 'CHALLENGED',
                 tier: 'Tier 4',
-                badgeColor: '#FF5A52',
+                badgeColor: 'var(--fault)',
                 title: 'CHALLENGED',
                 desc: 'All outbound transfers require step-up confirmation, regardless of amount.',
               },
               {
                 id: 'FROZEN',
                 tier: 'Tier 5',
-                badgeColor: '#FF5A52',
+                badgeColor: 'var(--fault)',
                 title: 'FROZEN',
                 desc: 'Zero transfers allowed. Account can only be salvaged via 48h Guardian Recovery.',
               },

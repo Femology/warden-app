@@ -315,8 +315,8 @@ export default function RecoveryCenterPage() {
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.05]"
           style={{
             background: isFrozen
-              ? 'radial-gradient(circle, #FF5A52 0%, transparent 70%)'
-              : 'radial-gradient(circle, #F2994A 0%, transparent 70%)',
+              ? 'radial-gradient(circle, var(--fault) 0%, transparent 70%)'
+              : 'radial-gradient(circle, var(--gate) 0%, transparent 70%)',
           }}
         />
       </div>

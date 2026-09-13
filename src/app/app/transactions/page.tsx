@@ -182,11 +182,11 @@ export default function TransactionsLedgerPage() {
       <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
         <div
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[550px] w-[850px] rounded-full blur-[140px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #22C38D 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--clear) 0%, transparent 70%)' }}
         />
         <div
           className="absolute top-1/2 right-0 h-[450px] w-[650px] rounded-full blur-[150px] opacity-[0.04]"
-          style={{ background: 'radial-gradient(circle, #F2994A 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, var(--gate) 0%, transparent 70%)' }}
         />
       </div>
 
@@ -517,23 +517,23 @@ export default function TransactionsLedgerPage() {
           <div className="flex-shrink-0">
             <svg width="240" height="70" viewBox="0 0 240 70" fill="none">
               {/* Linked Blockchain Nodes */}
-              <line x1="35" y1="35" x2="105" y2="35" stroke="#223229" strokeWidth="2" />
-              <line x1="105" y1="35" x2="175" y2="35" stroke="#223229" strokeWidth="2" />
+              <line x1="35" y1="35" x2="105" y2="35" stroke="var(--ink-700)" strokeWidth="2" />
+              <line x1="105" y1="35" x2="175" y2="35" stroke="var(--ink-700)" strokeWidth="2" />
 
               {/* Node 1 */}
-              <rect x="15" y="15" width="40" height="40" rx="8" fill="#0D1712" stroke="#22C38D" strokeWidth="1.5" />
-              <circle cx="35" cy="35" r="5" fill="#22C38D" />
+              <rect x="15" y="15" width="40" height="40" rx="8" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="1.5" />
+              <circle cx="35" cy="35" r="5" fill="var(--clear)" />
 
               {/* Node 2 */}
-              <rect x="85" y="15" width="40" height="40" rx="8" fill="#0D1712" stroke="#F2994A" strokeWidth="1.5" />
-              <polygon points="105,28 111,39 99,39" fill="#F2994A" />
+              <rect x="85" y="15" width="40" height="40" rx="8" fill="var(--ink-900)" stroke="var(--gate)" strokeWidth="1.5" />
+              <polygon points="105,28 111,39 99,39" fill="var(--gate)" />
 
               {/* Node 3 */}
-              <rect x="155" y="15" width="40" height="40" rx="8" fill="#0D1712" stroke="#22C38D" strokeWidth="1.5" />
-              <circle cx="175" cy="35" r="5" fill="#22C38D" />
+              <rect x="155" y="15" width="40" height="40" rx="8" fill="var(--ink-900)" stroke="var(--clear)" strokeWidth="1.5" />
+              <circle cx="175" cy="35" r="5" fill="var(--clear)" />
 
               {/* Pulse waves */}
-              <circle cx="175" cy="35" r="14" stroke="#22C38D" strokeWidth="1" strokeDasharray="2 2" className="animate-pulse" />
+              <circle cx="175" cy="35" r="14" stroke="var(--clear)" strokeWidth="1" strokeDasharray="2 2" className="animate-pulse" />
             </svg>
           </div>
         </div>
