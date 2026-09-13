@@ -3,8 +3,8 @@
 ## Unaudited -- use at your own risk
 
 **`warden-app` has not had a third-party security audit**, and neither has
-[`warden-contract`](https://github.com/Femology/warden-contract) or
-[`warden-sdk`](https://github.com/Femology/warden-sdk), which it depends on. This app
+[`warden-contract`](https://github.com/wardenoss/warden-contract) or
+[`warden-sdk`](https://github.com/wardenoss/warden-sdk), which it depends on. This app
 also has a stated, deliberate limitation: the step-up gate is app-enforced, not yet
 cryptographically enforced -- see the README before assuming more than that claims. Do
 not deploy this app for real funds without an audit of the full stack first.

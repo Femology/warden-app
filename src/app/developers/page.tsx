@@ -391,7 +391,7 @@ export default function DevelopersPage() {
                 </p>
               </div>
               <div className="mt-6 rounded-xl border border-ink-700 bg-ink-900 p-3 font-mono text-xs text-clear break-all">
-                npm i github:Femology/warden-sdk#v0.4.0
+                npm i github:wardenoss/warden-sdk#v0.4.0
               </div>
             </div>
 

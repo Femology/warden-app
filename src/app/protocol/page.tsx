@@ -489,7 +489,7 @@ export default function ProtocolPage() {
 
             <div className="flex flex-wrap gap-4">
               <a
-                href="https://github.com/Femology/warden-contract/blob/main/WARDEN-PROTOCOL.md"
+                href="https://github.com/wardenoss/warden-contract/blob/main/WARDEN-PROTOCOL.md"
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => sounds.playClick()}

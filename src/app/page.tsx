@@ -988,7 +988,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {/* Repo 1 */}
             <a
-              href="https://github.com/Femology/warden-contract"
+              href="https://github.com/wardenoss/warden-contract"
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
@@ -1014,7 +1014,7 @@ export default function Home() {
 
             {/* Repo 2 */}
             <a
-              href="https://github.com/Femology/warden-sdk"
+              href="https://github.com/wardenoss/warden-sdk"
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
@@ -1040,7 +1040,7 @@ export default function Home() {
 
             {/* Repo 3 */}
             <a
-              href="https://github.com/Femology/warden-app"
+              href="https://github.com/wardenoss/warden-app"
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
@@ -1066,7 +1066,7 @@ export default function Home() {
 
             {/* Repo 4 */}
             <a
-              href="https://github.com/Femology/warden-monitor"
+              href="https://github.com/wardenoss/warden-monitor"
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}
@@ -1092,7 +1092,7 @@ export default function Home() {
 
             {/* Repo 5 */}
             <a
-              href="https://github.com/Femology/warden-docs"
+              href="https://github.com/wardenoss/warden-docs"
               target="_blank"
               rel="noreferrer"
               onClick={() => sounds.playClick()}

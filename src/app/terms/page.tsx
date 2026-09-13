@@ -143,7 +143,7 @@ export default function TermsOfUsePage() {
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://github.com/Femology/warden-sdk"
+                href="https://github.com/wardenoss/warden-sdk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-xl border border-ink-700 bg-ink-900 px-4 py-2 font-mono text-xs text-clear hover:border-clear transition-colors"

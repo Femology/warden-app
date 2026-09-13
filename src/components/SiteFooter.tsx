@@ -179,7 +179,7 @@ export function SiteFooter() {
             </span>
             <div className="flex flex-col gap-2 font-mono text-xs">
               <a
-                href="https://github.com/Femology/warden-sdk"
+                href="https://github.com/wardenoss/warden-sdk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-mist-100 transition-colors flex items-center justify-between"
@@ -188,7 +188,7 @@ export function SiteFooter() {
                 <span className="text-mist-400">TypeScript</span>
               </a>
               <a
-                href="https://github.com/Femology/warden-contract"
+                href="https://github.com/wardenoss/warden-contract"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-mist-100 transition-colors flex items-center justify-between"
@@ -197,7 +197,7 @@ export function SiteFooter() {
                 <span className="text-mist-400">Rust</span>
               </a>
               <a
-                href="https://github.com/Femology/warden-app"
+                href="https://github.com/wardenoss/warden-app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-mist-100 transition-colors flex items-center justify-between"
@@ -206,7 +206,7 @@ export function SiteFooter() {
                 <span className="text-mist-400">Next.js</span>
               </a>
               <a
-                href="https://github.com/Femology/warden-monitor"
+                href="https://github.com/wardenoss/warden-monitor"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-mist-100 transition-colors flex items-center justify-between"
@@ -215,7 +215,7 @@ export function SiteFooter() {
                 <span className="text-mist-400">Indexer</span>
               </a>
               <a
-                href="https://github.com/Femology/warden-docs"
+                href="https://github.com/wardenoss/warden-docs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-mist-100 transition-colors flex items-center justify-between"

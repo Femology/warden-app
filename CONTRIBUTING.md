@@ -17,7 +17,7 @@ Thanks for looking at this. Contributions of any size are welcome.
 ## Local setup
 
 ```bash
-git clone https://github.com/Femology/warden-app.git
+git clone https://github.com/wardenoss/warden-app.git
 cd warden-app
 npm install
 cp .env.example .env.local   # fill in WARDEN_DEPLOYER_SECRET
