@@ -81,9 +81,9 @@ export function SiteFooter() {
               <Image
                 src="/logo/logo-mark-colorful.svg"
                 alt="Warden Logo"
-                width={32}
-                height={32}
-                className="h-8 w-8 transition-transform group-hover:scale-105"
+                width={200}
+                height={220}
+                className="h-8 w-auto transition-transform group-hover:scale-105"
               />
               <div className="flex flex-col">
                 <span className="font-display text-lg font-bold tracking-tight text-mist-100 group-hover:text-clear transition-colors">

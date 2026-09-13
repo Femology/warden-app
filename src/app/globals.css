@@ -52,15 +52,21 @@
   }
 }
 
-/* Hide scrollbars completely while preserving smooth mouse & touch scrolling */
-.no-scrollbar::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-.no-scrollbar {
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
+/* Hide scrollbars completely while preserving smooth mouse & touch scrolling.
+   Wrapped in @layer utilities -- Lightning CSS's global minifier pass
+   otherwise mangles the compound `.no-scrollbar::-webkit-scrollbar` selector
+   into invalid CSS (`*::-webkit-scrollbar.no-scrollbar`) when normalizing
+   this non-standard pseudo-element; @layer content skips that pass. */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
 }
 
 @theme {

@@ -31,9 +31,9 @@ export function SiteHeader() {
           <Image
             src="/logo/logo-mark-colorful.svg"
             alt="Warden Security Operating System"
-            width={36}
-            height={36}
-            className="h-8 w-8 sm:h-9 sm:w-9 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_12px_rgba(34,195,141,0.35)]"
+            width={200}
+            height={220}
+            className="h-8 w-auto sm:h-9 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_12px_rgba(34,195,141,0.35)]"
           />
           <div className="flex flex-col">
             <span className="font-display text-lg font-bold tracking-tight text-mist-100 transition-colors group-hover:text-clear">
