@@ -77,13 +77,9 @@
   />
 
   <!-- Outer Beveled Flange Wings -->
-  <!-- Top-Right Flange -->
   <polygon points="120,18 165,34 176,55 166,52 130,30" fill="url(#bevelHighlight)" opacity="0.7" />
-  <!-- Top-Left Flange -->
   <polygon points="80,18 35,34 24,55 34,52 70,30" fill="url(#bevelHighlight)" opacity="0.4" />
-  <!-- Lower-Right Flange -->
   <polygon points="184,95 174,130 162,122 170,95" fill="url(#bevelHighlight)" opacity="0.6" />
-  <!-- Lower-Left Flange -->
   <polygon points="16,95 26,130 38,122 30,95" fill="url(#bevelHighlight)" opacity="0.4" />
 
   <!-- Inner Recessed Border Rim -->
@@ -96,11 +92,8 @@
     opacity="0.8"
   />
 
-  <!-- =========================================================================
-       CIRCUIT BOARD TRACES & PADS (PCB Neural Network)
-  ========================================================================== -->
+  <!-- Circuit Board Traces & Pads -->
   <g stroke="url(#circuitGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
-    <!-- Top Vertical / Radiating Traces -->
     <path d="M 100, 28 L 100, 68" />
     <circle cx="100" cy="28" r="3" fill="#4EECD5" />
 
@@ -116,7 +109,6 @@
     <path d="M 130, 44 L 130, 64 L 124, 72" />
     <circle cx="130" cy="44" r="2" fill="#4EECD5" />
 
-    <!-- Left Flank Traces -->
     <path d="M 40, 68 L 56, 68 L 66, 80" />
     <circle cx="40" cy="68" r="2.5" fill="#4EECD5" />
 
@@ -132,7 +124,6 @@
     <path d="M 64, 152 L 78, 142" />
     <circle cx="64" cy="152" r="2" fill="#4EECD5" />
 
-    <!-- Right Flank Traces -->
     <path d="M 160, 68 L 144, 68 L 134, 80" />
     <circle cx="160" cy="68" r="2.5" fill="#4EECD5" />
 
@@ -148,7 +139,6 @@
     <path d="M 136, 152 L 122, 142" />
     <circle cx="136" cy="152" r="2" fill="#4EECD5" />
 
-    <!-- Bottom Tip Traces -->
     <path d="M 88, 180 L 88, 160" />
     <circle cx="88" cy="180" r="2" fill="#4EECD5" />
 
@@ -159,41 +149,19 @@
     <circle cx="100" cy="186" r="2.5" fill="#4EECD5" />
   </g>
 
-  <!-- =========================================================================
-       THE 3D FACETED "W" MONOGRAM
-  ========================================================================== -->
+  <!-- The 3D Faceted W Monogram -->
   <g filter="url(#neonGlow)">
-    <!-- Outer Glow Silhouette for W -->
-    <path
-      d="M 52, 74 L 75, 74 L 89, 126 L 100, 88 L 111, 126 L 125, 74 L 148, 74 L 126, 154 L 100, 154 L 100, 154 L 74, 154 Z"
-      fill="none"
-      stroke="#22C38D"
-      stroke-width="8"
-      opacity="0.3"
-    />
-
-    <!-- W: Left Outer Bevel (Light) -->
     <polygon points="52,74 65,74 81,142 74,154" fill="url(#wFacetLight)" />
-
-    <!-- W: Left Inner Bevel (Mid) -->
     <polygon points="65,74 76,74 91,128 81,142" fill="url(#wFacetMid)" />
-
-    <!-- W: Center-Left Diagonal Up (Light/Highlight) -->
     <polygon points="81,142 91,128 100,90 96,154" fill="url(#wFacetLight)" />
-
-    <!-- W: Center-Right Diagonal Up (Darker Shade) -->
     <polygon points="100,90 109,128 119,142 104,154" fill="url(#wFacetDark)" />
-
-    <!-- W: Right Inner Bevel (Mid) -->
     <polygon points="124,74 135,74 119,142 109,128" fill="url(#wFacetMid)" />
-
-    <!-- W: Right Outer Bevel (Dark) -->
     <polygon points="135,74 148,74 126,154 119,142" fill="url(#wFacetDark)" />
 
-    <!-- Sharp Ridge Centerlines & Specular Edges -->
+    <!-- Centerlines -->
     <polyline points="58,74 77,148 100,90 123,148 142,74" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
   </g>
 
-  <!-- Bottom Crest Bevel Detail -->
+  <!-- Bottom Crest Bevel -->
   <polygon points="100,204 88,188 112,188" fill="url(#bevelHighlight)" opacity="0.8" />
 </svg>

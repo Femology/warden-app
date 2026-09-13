@@ -29,6 +29,13 @@ export async function connectFreighterWallet(): Promise<string> {
   return address;
 }
 
+export function connectSimulatedSandboxWallet(): string {
+  const sandboxAddress = 'GCZLWARDENSANDBOX7ACCOUNTDEMO9TESTNET';
+  currentKind = 'freighter';
+  currentFreighterAddress = sandboxAddress;
+  return sandboxAddress;
+}
+
 export async function connectExistingPasskeyWallet(): Promise<string | undefined> {
   const contractId = await connectPasskeyWallet();
   if (contractId) currentKind = 'passkey';

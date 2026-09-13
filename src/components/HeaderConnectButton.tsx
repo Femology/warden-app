@@ -1,9 +1,12 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { connectFreighterWallet, connectedWalletId } from '@/lib/wallet';
 import { wardenClient } from '@/lib/wardenClient';
+
+import Link from 'next/link';
 
 /**
  * A compact, single-purpose Freighter button for the persistent nav shell --
@@ -27,9 +30,18 @@ export function HeaderConnectButton() {
       const address = await connectFreighterWallet();
       setWalletId(address);
       const policy = await wardenClient.getPolicy(address);
-      router.push(policy ? '/transfer' : '/policy');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
+      router.push(policy ? '/app' : '/policy');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (
+        msg.includes('closed the modal') ||
+        (err && typeof err === 'object' && 'code' in err && (err as { code: number }).code === -1)
+      ) {
+        // Voluntary dismissal
+        setError(null);
+      } else {
+        setError(msg);
+      }
     } finally {
       setConnecting(false);
     }
@@ -37,24 +49,29 @@ export function HeaderConnectButton() {
 
   if (walletId) {
     return (
-      <span className="address-mono rounded-full border border-ink-700 px-3 py-1.5 text-sm text-mist-400">
-        {walletId.slice(0, 4)}…{walletId.slice(-4)}
-      </span>
+      <Link
+        href="/app"
+        className="address-mono inline-flex items-center gap-2 rounded-full border border-ink-700 bg-ink-800/80 px-3 py-1.5 text-xs text-mist-100 hover:border-clear transition-colors shadow-sm"
+        title="Open Security Command Center"
+      >
+        <span className="h-2 w-2 rounded-full bg-clear animate-pulse" />
+        <span>{walletId.slice(0, 4)}…{walletId.slice(-4)}</span>
+      </Link>
     );
   }
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center gap-2">
       <button
         type="button"
         onClick={handleConnect}
         disabled={connecting}
-        className="rounded-full bg-edge px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="rounded-full bg-clear px-4 py-1.5 text-xs font-bold text-ink-900 transition-opacity hover:opacity-90 disabled:opacity-50 shadow-sm cursor-pointer"
       >
         {connecting ? 'Connecting…' : 'Connect Freighter'}
       </button>
       {error && (
-        <p role="alert" className="absolute right-0 top-full mt-2 w-56 text-right text-xs text-fault">
+        <p role="alert" className="absolute right-0 top-full mt-2 w-56 text-right text-xs text-fault font-mono">
           {error}
         </p>
       )}

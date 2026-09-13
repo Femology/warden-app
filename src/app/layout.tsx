@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from 'next/font/google';
 import { SiteHeader } from '@/components/SiteHeader';
+import { SiteFooter } from '@/components/SiteFooter';
 import './globals.css';
 
 const bricolage = Bricolage_Grotesque({
@@ -25,9 +26,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Warden',
+  title: 'Warden — Smart Account Security Operating System',
   description:
-    'A risk-policy engine for Stellar smart wallets: friction where the risk actually is, not on every transaction.',
+    'An on-chain spending governor on Stellar Soroban that lets honest daily purchases glide through in seconds, while halting abnormal account drains before funds ever leave your vault.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/logo/warden-shield-3d.png',
+  },
 };
 
 // Runs before hydration/paint so there's no flash of the wrong theme on
@@ -47,9 +53,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <SiteHeader />
-        {children}
+        <div className="flex-1">
+          {children}
+        </div>
+        <SiteFooter />
       </body>
     </html>
   );

@@ -6,26 +6,25 @@ const NETWORK = CONFIG.network === 'testnet' ? Networks.TESTNET : Networks.PUBLI
 
 let initialized = false;
 
-// Matches Warden's design system (master PRD section 6) -- the kit's own
-// default themes are a generic light/dark, not this product's ink/edge
-// palette. Every key here is required by the kit's own SwkAppTheme type.
+// Matches Warden's design system v2 (Zero Blue Rule):
+// Raised dark moss (#16251E), forest borders (#223229), canopy green (#22C38D), coral (#FF5A52)
 const WARDEN_KIT_THEME = {
-  background: '#18213A',
-  'background-secondary': '#101728',
-  'foreground-strong': '#E9EDF7',
-  foreground: '#E9EDF7',
-  'foreground-secondary': '#94A2C4',
-  primary: '#6C5CE7',
-  'primary-foreground': '#FFFFFF',
+  background: '#16251E',
+  'background-secondary': '#0D1712',
+  'foreground-strong': '#EAF2ED',
+  foreground: '#EAF2ED',
+  'foreground-secondary': '#93A99C',
+  primary: '#22C38D',
+  'primary-foreground': '#0D1712',
   transparent: 'transparent',
-  lighter: '#232F4F',
-  light: '#232F4F',
-  'light-gray': '#232F4F',
-  gray: '#94A2C4',
+  lighter: '#223229',
+  light: '#223229',
+  'light-gray': '#223229',
+  gray: '#93A99C',
   danger: '#FF5A52',
-  border: '#232F4F',
-  shadow: 'rgba(0, 0, 0, 0.4)',
-  'border-radius': '8px',
+  border: '#223229',
+  shadow: 'rgba(0, 0, 0, 0.6)',
+  'border-radius': '12px',
   'font-family': "'Instrument Sans', ui-sans-serif, system-ui, sans-serif",
 };
 
@@ -39,11 +38,17 @@ function ensureInit(): void {
   initialized = true;
 }
 
+export function isFreighterInstalled(): boolean {
+  if (typeof window === 'undefined') return false;
+  return Boolean(
+    (window as unknown as { freighter?: unknown }).freighter ||
+    (window as unknown as { stellar?: unknown }).stellar
+  );
+}
+
 /**
- * Opens the kit's wallet picker (Freighter, and anything else in `modules`
- * above) and returns the connected classic G... address. Unlike a passkey
- * smart wallet, this address IS a real funded account -- it can pay its own
- * transaction fees directly, no server-side co-signer needed.
+ * Opens the kit's wallet picker and returns the connected classic G... address.
+ * Catches user modal dismissal cleanly.
  */
 export async function connectFreighter(): Promise<string> {
   ensureInit();
@@ -56,9 +61,7 @@ export async function disconnectFreighter(): Promise<void> {
   await StellarWalletsKit.disconnect();
 }
 
-/** Signs a bare XDR string directly -- no AssembledTransaction reconstruction
- * needed, unlike the passkey path, since the kit works with a plain XDR and
- * whichever wallet module is currently selected. */
+/** Signs a bare XDR string directly. */
 export async function signWithFreighter(xdr: string): Promise<string> {
   ensureInit();
   const { signedTxXdr } = await StellarWalletsKit.signTransaction(xdr, {
